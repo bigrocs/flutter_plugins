@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
     dynamic platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await InspectionPay.union_pay;
+      platformVersion = await InspectionPay.union_pay_scan({'amt': 0});
       print(platformVersion);
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
