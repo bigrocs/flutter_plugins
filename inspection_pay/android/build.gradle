@@ -30,5 +30,6 @@ android {
 }
 
 dependencies {
+    compileOnly files('libs/flutter.jar')
     implementation files('libs/sdk4upos_20180625_mix.jar')
 }

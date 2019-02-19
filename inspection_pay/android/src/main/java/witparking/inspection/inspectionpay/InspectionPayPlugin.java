@@ -50,10 +50,14 @@ public class InspectionPayPlugin implements MethodCallHandler {
         e.printStackTrace();
       }
 
-      AppHelper.callTrans(InspectionPayPlugin.registrar.activity(), "POS 通", "扫一扫", transData);
-      //AppHelper.callTrans(cordova.getActivity(), "银行卡收款", "消费", transData);
+      try {
+        AppHelper.callTrans(InspectionPayPlugin.registrar.activity(), "POS 通", "扫一扫", transData);
+        //AppHelper.callTrans(cordova.getActivity(), "银行卡收款", "消费", transData);
+      }catch (Exception e) {
+        result.success("未安装银联客户端");
+      }
 
-      result.success("--------");
+      result.success("支付成功");
 
     } else {
       result.notImplemented();
