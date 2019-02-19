@@ -33,7 +33,7 @@ public class InspectionPayPlugin implements MethodCallHandler {
         e.printStackTrace();
       }
 
-      result.success(jsonObject.toString());
+      result.success("--------");
 
     } else {
       result.notImplemented();
