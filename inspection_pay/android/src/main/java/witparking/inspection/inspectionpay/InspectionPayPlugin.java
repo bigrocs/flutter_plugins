@@ -13,17 +13,21 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 import com.ums.AppHelper;
 
-/** InspectionPayPlugin */
+/**
+ * InspectionPayPlugin
+ */
 public class InspectionPayPlugin implements MethodCallHandler {
 
   private static final String SCANTOPAY = "pay_scan";
-  private static final String UNIONPAY = "pay_union";
+  private static final String UNIONPAY = "pay_union_scan";
 
   private static final String WUWEIUNIONAPPID = "e7e157a1475e453ea82d17b4f9184551";
 
   private static Registrar registrar;
 
-  /** Plugin registration. */
+  /**
+   * Plugin registration.
+   */
   public static void registerWith(Registrar registrar) {
     InspectionPayPlugin.registrar = registrar;
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "inspection_pay");
@@ -33,34 +37,40 @@ public class InspectionPayPlugin implements MethodCallHandler {
   @Override
   public void onMethodCall(MethodCall call, Result result) {
 
-    if (call.method.equals(UNIONPAY)) {
-
-      JSONObject jsonObject = new JSONObject();
-      try {
-        jsonObject.put("test", "AAAA");
-      } catch (JSONException e) {
-        e.printStackTrace();
-      }
-
-      JSONObject transData = new JSONObject();
-      try {
-        transData.put("appId", WUWEIUNIONAPPID);
-        transData.put("amt", 0.01);
-      } catch (JSONException e) {
-        e.printStackTrace();
-      }
-
-      try {
-        AppHelper.callTrans(InspectionPayPlugin.registrar.activity(), "POS 通", "扫一扫", transData);
-        //AppHelper.callTrans(cordova.getActivity(), "银行卡收款", "消费", transData);
-      }catch (Exception e) {
-        result.success("未安装银联客户端");
-      }
-
-      result.success("支付成功");
-
-    } else {
-      result.notImplemented();
+    switch (call.method) {
+      case UNIONPAY:
+        unionPay(result, call.arguments);
+        break;
+      case SCANTOPAY:
+        break;
+      default:
+        result.notImplemented();
+        break;
     }
+  }
+
+  private void unionPay(Result result, Object param) {
+    JSONObject jsonObject = new JSONObject();
+    try {
+      jsonObject.put("test", "AAAA");
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
+
+    JSONObject transData = new JSONObject();
+    try {
+      transData.put("appId", WUWEIUNIONAPPID);
+      transData.put("amt", 0.01);
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
+
+    try {
+      AppHelper.callTrans(InspectionPayPlugin.registrar.activity(), "POS 通", "扫一扫", transData);
+      //AppHelper.callTrans(cordova.getActivity(), "银行卡收款", "消费", transData);
+    } catch (Exception e) {
+      result.success("未安装银联客户端");
+    }
+    result.success("支付成功");
   }
 }
