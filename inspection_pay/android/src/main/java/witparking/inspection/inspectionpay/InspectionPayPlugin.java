@@ -1,6 +1,7 @@
 package witparking.inspection.inspectionpay;
 
 import android.content.pm.ApplicationInfo;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +26,10 @@ public class InspectionPayPlugin implements MethodCallHandler {
 
   private static Registrar registrar;
 
+  private Result unionPayResult;
+
+  private EventBus eventBus = EventBus.getDefault();
+
   /**
    * Plugin registration.
    */
@@ -39,7 +44,10 @@ public class InspectionPayPlugin implements MethodCallHandler {
 
     switch (call.method) {
       case UNIONPAYSCAN:
-        unionPay(call, result);
+        unionPay(0, call, result);
+        break;
+      case SCANTOPAY:
+        result.notImplemented();
         break;
       default:
         result.notImplemented();
@@ -47,25 +55,38 @@ public class InspectionPayPlugin implements MethodCallHandler {
     }
   }
 
-  private void unionPay(MethodCall call, Result result) {
+  private void unionPay(int type, MethodCall call, Result result) {
 
-    int a = call.argument("amt") == null ? 0 : (int) call.argument("amt");
+    unionPayResult = result;
+    int amt = call.argument("amt") == null ? 0 : (int) call.argument("amt");
 
     JSONObject transData = new JSONObject();
     try {
       transData.put("appId", WUWEIUNIONAPPID);
-      transData.put("amt", 0.01);
+      transData.put("amt", amt);
     } catch (JSONException e) {
       e.printStackTrace();
+      result.success("参数异常");
+      return;
     }
 
     try {
-      AppHelper.callTrans(InspectionPayPlugin.registrar.activity(), "POS 通", "扫一扫", transData);
-      //AppHelper.callTrans(cordova.getActivity(), "银行卡收款", "消费", transData);
+      if (type == 0) {
+        AppHelper.callTrans(InspectionPayPlugin.registrar.activity(), "POS 通", "扫一扫", transData);
+      }else
+      {
+        AppHelper.callTrans(InspectionPayPlugin.registrar.activity(), "银行卡收款", "消费", transData);
+      }
     } catch (Exception e) {
       result.success("未安装银联客户端");
-      return;
     }
-    //result.success("支付成功");
+  }
+
+  /*
+  * 处理银联支付结果
+  * event_bus通知
+  * */
+  public void onEventMainThread(UnionPayEvent event) {
+    unionPayResult.success(event.result.toString());
   }
 }

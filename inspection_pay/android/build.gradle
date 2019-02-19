@@ -31,4 +31,5 @@ android {
 
 dependencies {
     implementation files('libs/sdk4upos_20180625_mix.jar')
+    implementation files('libs/EventBus-2.4.jar')
 }
