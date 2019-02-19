@@ -16,8 +16,9 @@ class InspectionPay {
   /*
   * 银联扫码支付
   * */
-  static Future<String> union_pay_scan(dynamic param) async {
+  static Future union_pay_scan(dynamic param) async {
     dynamic res = await _channel.invokeMethod('pay_union_scan', param);
+    print(res);
     return res;
   }
   /*

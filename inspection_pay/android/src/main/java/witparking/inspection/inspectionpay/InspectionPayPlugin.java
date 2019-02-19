@@ -13,6 +13,7 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 import com.ums.AppHelper;
+import com.ypy.eventbus.EventBus;
 
 /**
  * InspectionPayPlugin
@@ -29,6 +30,10 @@ public class InspectionPayPlugin implements MethodCallHandler {
   private Result unionPayResult;
 
   private EventBus eventBus = EventBus.getDefault();
+
+  private InspectionPayPlugin() {
+    eventBus.register(this);
+  };
 
   /**
    * Plugin registration.
@@ -87,6 +92,6 @@ public class InspectionPayPlugin implements MethodCallHandler {
   * event_bus通知
   * */
   public void onEventMainThread(UnionPayEvent event) {
-    unionPayResult.success(event.result.toString());
+    unionPayResult.success(event.result);
   }
 }
