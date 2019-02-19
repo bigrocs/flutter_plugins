@@ -49,7 +49,7 @@ public class InspectionPayPlugin implements MethodCallHandler {
 
   private void unionPay(MethodCall call, Result result) {
 
-    int a = call.argument("appId");
+    int a = call.argument("appId") == null ? 0 : (int) call.argument("amt");
 
     JSONObject transData = new JSONObject();
     try {
