@@ -17,21 +17,21 @@ class InspectionPay {
   * 银联扫码支付
   * */
   static Future<String> union_pay_scan(dynamic param) async {
-    dynamic res = await _channel.invokeMethod('pay_union_scan');
+    dynamic res = await _channel.invokeMethod('pay_union_scan', param);
     return res;
   }
   /*
   * 银联刷卡支付
   * */
   static Future<String> union_pay_card(dynamic param) async {
-    dynamic res = await _channel.invokeMethod('union_pay_card');
+    dynamic res = await _channel.invokeMethod('union_pay_card', param);
     return res;
   }
   /*
   * 扫码支付
   * */
   static Future<String> pay_scan(dynamic param) async {
-    dynamic res = await _channel.invokeMethod('pay_scan');
+    dynamic res = await _channel.invokeMethod('pay_scan', param);
     return res;
   }
 }
