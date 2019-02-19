@@ -21,8 +21,11 @@ public class InspectionPayPlugin implements MethodCallHandler {
 
   private static final String WUWEIUNIONAPPID = "e7e157a1475e453ea82d17b4f9184551";
 
+  private static Registrar registrar;
+
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
+    InspectionPayPlugin.registrar = registrar;
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "inspection_pay");
     channel.setMethodCallHandler(new InspectionPayPlugin());
   }
@@ -47,7 +50,7 @@ public class InspectionPayPlugin implements MethodCallHandler {
         e.printStackTrace();
       }
 
-      AppHelper.callTrans(null, "POS 通", "扫一扫", transData);
+      AppHelper.callTrans(InspectionPayPlugin.registrar.activity(), "POS 通", "扫一扫", transData);
       //AppHelper.callTrans(cordova.getActivity(), "银行卡收款", "消费", transData);
 
       result.success("--------");
