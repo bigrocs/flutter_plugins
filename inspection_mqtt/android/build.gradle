@@ -1,5 +1,3 @@
-package android
-
 group 'witparking.inspection.inspectionmqtt'
 version '1.0-SNAPSHOT'
 buildscript {
