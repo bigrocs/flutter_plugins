@@ -9,8 +9,8 @@ class InspectionMqtt {
   /*
   * 获取clientid
   * */
-  static Future getMQTTClientID() async {
-    final dynamic result = await _channel.invokeMethod('get_mqtt_client_id');
+  static Future getMQTTClientID({Object param}) async {
+    final dynamic result = await _channel.invokeMethod('get_mqtt_client_id', param);
     return result;
   }
 

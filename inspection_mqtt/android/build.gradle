@@ -1,3 +1,5 @@
+package android
+
 group 'witparking.inspection.inspectionmqtt'
 version '1.0-SNAPSHOT'
 buildscript {
@@ -14,6 +16,7 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'http://172.16.100.3:8087/nexus-service/content/groups/public/' }
     }
 }
 apply plugin: 'com.android.library'
@@ -38,4 +41,5 @@ dependencies {
     implementation files('libs/org.eclipse.paho.client.mqttv3-1.2.0.jar')
     compileOnly files('libs/EventBus-2.4.jar')
     implementation files('libs/encryption3des.jar')
+    compile 'com.sonli:spush-codec-pole:1.0.0'
 }
