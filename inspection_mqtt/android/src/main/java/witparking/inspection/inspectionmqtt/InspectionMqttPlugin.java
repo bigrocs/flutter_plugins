@@ -1,5 +1,7 @@
 package witparking.inspection.inspectionmqtt;
 
+import com.ypy.eventbus.EventBus;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,11 +21,14 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 public class InspectionMqttPlugin implements MethodCallHandler {
 
     private static Registrar registrar;
+    private static EventChannel.EventSink eventSink;
 
     private MqttManager mqttManager;
 
     private InspectionMqttPlugin() {
         mqttManager = new MqttManager(InspectionMqttPlugin.registrar.activity(), "DD8F9EFA1BAC44D9B3B583BC00BE805D");
+        EventBus eventBus = EventBus.getDefault();
+        eventBus.register(this);
     }
 
     /**
@@ -40,7 +45,7 @@ public class InspectionMqttPlugin implements MethodCallHandler {
         message_channel.setStreamHandler(new EventChannel.StreamHandler() {
             @Override
             public void onListen(Object o, EventChannel.EventSink eventSink) {
-
+                InspectionMqttPlugin.eventSink = eventSink;
             }
 
             @Override
@@ -82,4 +87,11 @@ public class InspectionMqttPlugin implements MethodCallHandler {
 
     }
 
+    /*
+     * 处理MQTT接收到的消息
+     * event_bus通知
+     * */
+    public void onEventMainThread(SendMessageEvent event) {
+        InspectionMqttPlugin.eventSink.success(event.message);
+    }
 }
