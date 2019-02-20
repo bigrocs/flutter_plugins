@@ -39,5 +39,5 @@ dependencies {
     implementation files('libs/org.eclipse.paho.client.mqttv3-1.2.0.jar')
     compileOnly files('libs/EventBus-2.4.jar')
     implementation files('libs/encryption3des.jar')
-    compile 'com.sonli:spush-codec-pole:1.0.0'
+    implementation 'com.sonli:spush-codec-pole:1.0.0'
 }

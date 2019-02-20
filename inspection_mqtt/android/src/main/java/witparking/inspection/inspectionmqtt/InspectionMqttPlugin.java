@@ -1,5 +1,12 @@
 package witparking.inspection.inspectionmqtt;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -23,9 +30,24 @@ public class InspectionMqttPlugin implements MethodCallHandler {
      * Plugin registration.
      */
     public static void registerWith(Registrar registrar) {
+
         InspectionMqttPlugin.registrar = registrar;
+
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "inspection_mqtt");
         channel.setMethodCallHandler(new InspectionMqttPlugin());
+
+        final EventChannel message_channel = new EventChannel(registrar.messenger(), "mqtt.event.message");
+        message_channel.setStreamHandler(new EventChannel.StreamHandler() {
+            @Override
+            public void onListen(Object o, EventChannel.EventSink eventSink) {
+
+            }
+
+            @Override
+            public void onCancel(Object o) {
+
+            }
+        });
     }
 
     @Override
@@ -59,4 +81,5 @@ public class InspectionMqttPlugin implements MethodCallHandler {
         }, (String) call.argument("clientid_service_url"));
 
     }
+
 }

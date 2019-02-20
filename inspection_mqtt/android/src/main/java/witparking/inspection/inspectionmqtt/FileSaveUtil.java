@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 
 public class FileSaveUtil {
 
-  public static String CIDFILEPATH = "/push20190123/";
+  public static String CIDFILEPATH = "/push20190125/";
 
   // 向SD卡写入数据
   public static  void writeSDcard(Context mComtext,String str) {
