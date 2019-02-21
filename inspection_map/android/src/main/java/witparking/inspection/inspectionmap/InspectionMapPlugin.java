@@ -1,5 +1,7 @@
 package witparking.inspection.inspectionmap;
 
+import java.util.HashMap;
+
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -25,7 +27,7 @@ public class InspectionMapPlugin implements MethodCallHandler {
     /**
      * Plugin registration.
      */
-    public static void registerWith(Registrar registrar) {
+    public static void registerWith(final Registrar registrar) {
 
         InspectionMapPlugin.registrar = registrar;
 
@@ -35,8 +37,15 @@ public class InspectionMapPlugin implements MethodCallHandler {
         final EventChannel message_channel = new EventChannel(registrar.messenger(), "map.event.location");
         message_channel.setStreamHandler(new EventChannel.StreamHandler() {
             @Override
-            public void onListen(Object o, EventChannel.EventSink eventSink) {
+            public void onListen(Object o, final EventChannel.EventSink eventSink) {
                 InspectionMapPlugin.eventSink = eventSink;
+                LBSLocation lbsLocation = new LBSLocation(registrar.activity());
+                lbsLocation.start(new LocationInterface() {
+                    @Override
+                    public void onLocationUpdate(HashMap res) {
+                        eventSink.success(res);
+                    }
+                });
             }
 
             @Override
@@ -55,6 +64,7 @@ public class InspectionMapPlugin implements MethodCallHandler {
                 startGather(call, result);
                 break;
             case "stopGather":
+                lbsTrace.stop();
                 break;
             default:
                 result.notImplemented();
@@ -64,9 +74,10 @@ public class InspectionMapPlugin implements MethodCallHandler {
     }
 
     /*
-    * 开启鹰眼轨迹
-    * */
-    void startGather(MethodCall call, Result result) {
+     * 开启鹰眼轨迹
+     * */
+    private void startGather(MethodCall call, Result result) {
         lbsTrace.start((String) call.argument("entity"));
+        result.success("成功开启鹰眼轨迹");
     }
 }
