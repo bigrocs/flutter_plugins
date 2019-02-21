@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="690a5f70-bddf-4935-b33e-c741dc6ed658" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionmqtt/MqttUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_mqtt.iml" beforeDir="false" afterPath="$PROJECT_DIR$/inspection_mqtt.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="690a5f70-bddf-4935-b33e-c741dc6ed658" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -22,7 +18,7 @@
     <session id="1189563829">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.4" value="1" />

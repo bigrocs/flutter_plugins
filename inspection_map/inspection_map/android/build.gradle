@@ -1,0 +1,45 @@
+group 'witparking.inspection.inspectionmap'
+version '1.0-SNAPSHOT'
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+    }
+}
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 16
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    implementation files('libs/okio-1.13.0.jar')
+    implementation files('libs/okhttp-3.8.1.jar')
+    implementation files('libs/bos-android-sdk-1.0.3.jar')
+    implementation files('libs/BaiduTraceSDK_v3_0_8.jar')
+    implementation files('libs/BaiduLBS_Android.jar')
+    implementation files('libs/component_common_sdk_1.0.0.jar')
+    implementation files('libs/IndoorscapeAlbumPlugin.jar')
+}
