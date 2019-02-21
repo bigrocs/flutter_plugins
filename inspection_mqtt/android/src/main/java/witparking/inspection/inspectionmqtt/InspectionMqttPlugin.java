@@ -41,6 +41,9 @@ public class InspectionMqttPlugin implements MethodCallHandler {
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "inspection_mqtt");
         channel.setMethodCallHandler(new InspectionMqttPlugin());
 
+        /*
+        * 消息上报通道
+        * */
         final EventChannel message_channel = new EventChannel(registrar.messenger(), "mqtt.event.message");
         message_channel.setStreamHandler(new EventChannel.StreamHandler() {
             @Override
@@ -50,7 +53,7 @@ public class InspectionMqttPlugin implements MethodCallHandler {
 
             @Override
             public void onCancel(Object o) {
-
+                InspectionMqttPlugin.eventSink = null;
             }
         });
     }
@@ -72,6 +75,7 @@ public class InspectionMqttPlugin implements MethodCallHandler {
     * */
     private void getClientID(final MethodCall call, final Result result) {
 
+        MqttManager.clientIdSavePath = call.argument("clientid_save_file_path");
         MqttManager.getClientId(InspectionMqttPlugin.registrar.activity(), new MqttManager.ClientIdCallback() {
             @Override
             public void callBack(String clentid, String name) {

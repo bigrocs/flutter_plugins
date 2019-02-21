@@ -70,6 +70,7 @@ public class MqttManager {
     private static String ClientId;
     private static String mId;
 
+    public static String clientIdSavePath;
 
     @SuppressLint("HandlerLeak")
     public MqttManager(Context mContext, String appId) {
@@ -370,7 +371,7 @@ public class MqttManager {
         if (clientId != null && clientId.length() > 0) {
             return clientId;
         }
-        String str = FileSaveUtil.readSDcard(mContext);
+        String str = FileSaveUtil.readSDcard(mContext, clientIdSavePath);
         if (str == null || str.length() == 0) {
             return null;
         }
@@ -378,7 +379,7 @@ public class MqttManager {
     }
 
     private static void SaveClientIdToCooke(Context mContext, String str) {
-        FileSaveUtil.writeSDcard(mContext, str);
+        FileSaveUtil.writeSDcard(mContext, str, clientIdSavePath);
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("mqtt", Context.MODE_PRIVATE); //私有数据
         SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
         editor.putString("clientId", str);
@@ -430,7 +431,7 @@ public class MqttManager {
 
         String m_szLongID = m_szImei + m_szDevIDShort
                 + m_szAndroidID+ m_szWLANMAC + m_szBTMAC+mContext.getPackageName();
-// compute md5
+        // compute md5
         MessageDigest m = null;
         try {
             m = MessageDigest.getInstance("MD5");
@@ -438,16 +439,16 @@ public class MqttManager {
             e.printStackTrace();
         }
         m.update(m_szLongID.getBytes(),0,m_szLongID.length());
-// get md5 bytes
+        // get md5 bytes
         byte p_md5Data[] = m.digest();
-// create a hex string
+        // create a hex string
         String m_szUniqueID = new String();
         for (int i=0;i<p_md5Data.length;i++) {
             int b =  (0xFF & p_md5Data[i]);
-// if it is a single digit, make sure it have 0 in front (proper padding)
+        // if it is a single digit, make sure it have 0 in front (proper padding)
             if (b <= 0xF)
                 m_szUniqueID+="0";
-// add number to string
+        // add number to string
             m_szUniqueID+=Integer.toHexString(b);
         }   // hex string to uppercase
         m_szUniqueID = m_szUniqueID.toUpperCase();
