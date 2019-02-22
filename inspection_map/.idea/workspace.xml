@@ -2,24 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1134a407-c750-4c64-901c-390ec069c7ca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/android/libs/armeabi-v7a/libBaiduMapSDK_base_v5_2_1.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/libs/armeabi-v7a/libBaiduMapSDK_map_v5_2_1.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/libs/armeabi-v7a/libapp_BaiduPanoramaAppLib.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/libs/armeabi-v7a/libindoor.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/libs/armeabi-v7a/liblocSDK7b.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/libs/armeabi/libBaiduMapSDK_base_v5_2_1.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/libs/armeabi/libBaiduMapSDK_map_v5_2_1.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/libs/armeabi/libBaiduTraceSDK_v3_0_8.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/libs/armeabi/libapp_BaiduPanoramaAppLib.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/libs/armeabi/libindoor.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/libs/armeabi/liblocSDK7b.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionmap/InspectionMapPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionmap/InspectionMapPlugin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionmap/LBSLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionmap/LBSLocation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../inspection_mqtt/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../inspection_mqtt/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../inspection_mqtt/android/libs/armeabi/lib3des-lib.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/inspection_map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/inspection_map.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -73,8 +58,8 @@
         <counts>
           <entry key="project.closed" value="2" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.3" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -89,15 +74,25 @@
           <entry key="JAVA" value="1" />
         </counts>
       </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="dart" value="67" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Dart" value="67" />
+        </counts>
+      </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/inspection_map.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="8" column="76" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="76" />
+            <state relative-caret-position="272">
+              <caret line="29" column="62" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="62" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -114,7 +109,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/android/build.gradle">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -127,9 +122,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lib/inspection_map.dart" />
         <option value="$PROJECT_DIR$/example/lib/main.dart" />
         <option value="$PROJECT_DIR$/android/build.gradle" />
+        <option value="$PROJECT_DIR$/lib/inspection_map.dart" />
       </list>
     </option>
   </component>
@@ -146,8 +141,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
@@ -155,23 +150,6 @@
             <path>
               <item name="inspection_map" type="b2602c69:ProjectViewProjectNode" />
               <item name="inspection_map" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="inspection_map" type="b2602c69:ProjectViewProjectNode" />
-              <item name="inspection_map" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="inspection_map" type="b2602c69:ProjectViewProjectNode" />
-              <item name="inspection_map" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="libs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="inspection_map" type="b2602c69:ProjectViewProjectNode" />
-              <item name="inspection_map" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="inspection_map" type="b2602c69:ProjectViewProjectNode" />
@@ -236,6 +214,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1245" height="777" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19617623" />
       <window_info id="Captures" order="1" side_tool="true" />
@@ -290,14 +269,9 @@
     <entry file="file://$PROJECT_DIR$/example/android/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/inspection_map.dart">
+    <entry file="file://$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionmap/LBSTrace.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="8" column="76" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="76" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
+        <state relative-caret-position="-915" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
@@ -307,13 +281,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionmap/LBSTrace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-915" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/android/build.gradle">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/inspection_map.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="29" column="62" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

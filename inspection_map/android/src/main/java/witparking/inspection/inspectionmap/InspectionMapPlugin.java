@@ -68,6 +68,9 @@ public class InspectionMapPlugin implements MethodCallHandler {
             case "stopGather":
                 lbsTrace.stop();
                 break;
+            case "getUserLocation":
+                getUserLocation(result);
+                break;
             default:
                 result.notImplemented();
                 break;
@@ -81,5 +84,20 @@ public class InspectionMapPlugin implements MethodCallHandler {
     private void startGather(MethodCall call, Result result) {
         lbsTrace.start((String) call.argument("entity"));
         result.success("成功开启鹰眼轨迹");
+    }
+
+    /*
+    * 获取用户位置信息
+    * */
+    private void getUserLocation(final Result result) {
+
+        LBSLocation lbsLocation = new LBSLocation(registrar.activity());
+        lbsLocation.onceGet = true;
+        lbsLocation.start(new LocationInterface() {
+            @Override
+            public void onLocationUpdate(HashMap res) {
+                result.success(res);
+            }
+        });
     }
 }

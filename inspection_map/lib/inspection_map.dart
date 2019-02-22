@@ -23,6 +23,13 @@ class InspectionMap {
     return res;
   }
 
+  /*
+  * 获取用户当前位置
+  * */
+  static Future getUserLocation() async {
+    dynamic res = await _channel.invokeMethod('getUserLocation');
+    return res;
+  }
 
   /*
   * 监听用户定位变化

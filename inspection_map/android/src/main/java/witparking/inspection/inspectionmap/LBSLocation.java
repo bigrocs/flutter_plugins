@@ -10,6 +10,8 @@ import java.util.HashMap;
 
 public class LBSLocation {
 
+    public boolean onceGet = false;
+
     private Activity activity;
 
     private LocationInterface locationInterface;
@@ -37,7 +39,7 @@ public class LBSLocation {
         option.setCoorType("bd09ll");
         //可选，默认gcj02，设置返回的定位结果坐标系
 
-        int span = 5000 * 60 * 5; //五分钟
+        int span = 5000 * 60;
         option.setScanSpan(span);
         //可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
 
@@ -81,6 +83,7 @@ public class LBSLocation {
                 map.put("lng", lng);
                 map.put("address", add);
                 locationInterface.onLocationUpdate(map);
+                if (onceGet) mLocationClient.stop();
             }
         }
     }
