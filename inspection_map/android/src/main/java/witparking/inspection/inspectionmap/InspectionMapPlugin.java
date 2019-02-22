@@ -1,5 +1,6 @@
 package witparking.inspection.inspectionmap;
 
+
 import java.util.HashMap;
 
 import io.flutter.plugin.common.EventChannel;
@@ -39,6 +40,7 @@ public class InspectionMapPlugin implements MethodCallHandler {
             @Override
             public void onListen(Object o, final EventChannel.EventSink eventSink) {
                 InspectionMapPlugin.eventSink = eventSink;
+
                 LBSLocation lbsLocation = new LBSLocation(registrar.activity());
                 lbsLocation.start(new LocationInterface() {
                     @Override

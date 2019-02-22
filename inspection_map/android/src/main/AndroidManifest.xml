@@ -23,10 +23,15 @@
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
 
     <application>
+
         <service
             android:name="com.baidu.trace.LBSTraceService"
             android:enabled="true"
             android:process=":remote">
+        </service>
+
+        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote">
+
         </service>
 
         <meta-data

@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="690a5f70-bddf-4935-b33e-c741dc6ed658" name="Default" comment="" />
+    <list default="true" id="690a5f70-bddf-4935-b33e-c741dc6ed658" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/../inspection_map/android/libs/armeabi-v7a/libBaiduMapSDK_base_v5_2_1.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../inspection_map/android/libs/armeabi-v7a/libBaiduMapSDK_map_v5_2_1.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../inspection_map/android/libs/armeabi-v7a/libapp_BaiduPanoramaAppLib.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../inspection_map/android/libs/armeabi-v7a/libindoor.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../inspection_map/android/libs/armeabi-v7a/liblocSDK7b.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../inspection_map/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../inspection_map/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../inspection_map/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../inspection_map/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../inspection_map/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../inspection_map/android/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../inspection_map/android/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../inspection_map/android/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../inspection_map/android/src/main/java/witparking/inspection/inspectionmap/InspectionMapPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../inspection_map/android/src/main/java/witparking/inspection/inspectionmap/InspectionMapPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../inspection_map/android/src/main/java/witparking/inspection/inspectionmap/LBSLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../inspection_map/android/src/main/java/witparking/inspection/inspectionmap/LBSLocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/libs/armeabi/lib3des-lib.so" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -18,13 +31,13 @@
     <session id="1189563829">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -68,16 +81,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/android/build.gradle">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pubspec.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+            <state relative-caret-position="180">
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
             </state>
           </provider>
         </entry>
@@ -108,13 +121,17 @@
     <option name="width" value="1244" />
     <option name="height" value="777" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -122,31 +139,11 @@
               <item name="inspection_mqtt" type="b2602c69:ProjectViewProjectNode" />
               <item name="inspection_mqtt" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="inspection_mqtt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="inspection_mqtt" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="inspection_mqtt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="inspection_mqtt" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="inspection_mqtt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="inspection_mqtt" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="inspectionmqtt" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
         <option name="show-excluded-files" value="false" />
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -158,6 +155,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/android/libs/armeabi" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/android" />
       <recent name="$PROJECT_DIR$/android/libs" />
@@ -389,7 +387,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1244" height="777" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24958402" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -446,23 +443,7 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/android/android/src/main/java/witparking/inspection/inspectionmqtt/MqttUtil.java" />
-    <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionmqtt/MqttUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/inspection_mqtt.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="27" column="3" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionmqtt/MqttUtil.java" />
     <entry file="file://$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionmqtt/FileSaveUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-507">
@@ -477,15 +458,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/build.gradle">
+    <entry file="file://$PROJECT_DIR$/lib/inspection_mqtt.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="27" column="3" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+        <state relative-caret-position="180">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/build.gradle">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

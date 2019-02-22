@@ -1,7 +1,6 @@
 package witparking.inspection.inspectionmap;
 
 import android.app.Activity;
-
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -11,12 +10,16 @@ import java.util.HashMap;
 
 public class LBSLocation {
 
+    private Activity activity;
+
     private LocationInterface locationInterface;
 
     public LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
 
     public LBSLocation(Activity activity) {
+
+        this.activity = activity;
 
         mLocationClient = new LocationClient(activity);
         //声明LocationClient类
@@ -34,7 +37,7 @@ public class LBSLocation {
         option.setCoorType("bd09ll");
         //可选，默认gcj02，设置返回的定位结果坐标系
 
-        int span = 1000;
+        int span = 5000 * 60 * 5; //五分钟
         option.setScanSpan(span);
         //可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
 
@@ -83,6 +86,7 @@ public class LBSLocation {
     }
 
     public void start(LocationInterface locationInterface) {
+
         this.locationInterface = locationInterface;
         mLocationClient.start();
     }
