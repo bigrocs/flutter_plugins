@@ -12,6 +12,12 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 public class InspectionVoicePlugin implements MethodCallHandler {
 
     private static Registrar registrar;
+    private Speech speech;
+
+    private InspectionVoicePlugin() {
+        speech = new Speech(InspectionVoicePlugin.registrar.activity());
+    }
+
     /**
      * Plugin registration.
      */
@@ -26,6 +32,12 @@ public class InspectionVoicePlugin implements MethodCallHandler {
         switch (call.method) {
             case "speechSynthesis":
                 speechSynthesis(call);
+                break;
+            case "startSpeechInput":
+                speech.startASR();
+                break;
+            case "stopSpeechInput":
+                speech.stopASR();
                 break;
             default:
                 break;

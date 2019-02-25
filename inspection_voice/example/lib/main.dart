@@ -34,15 +34,29 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: GestureDetector(
-            child: Container(
-              width: 100,
-              height: 100,
-              color: Colors.red,
-            ),
-            onTap: () {
-              InspectionVoice.speechSynthesis(param: '鲁B99997');
-            },
+          child: Column(
+            children: <Widget>[
+              GestureDetector(
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  color: Colors.red,
+                ),
+                onTap: () {
+                  InspectionVoice.startSpeechInput();
+                },
+              ),
+              GestureDetector(
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  color: Colors.green,
+                ),
+                onTap: () {
+                  InspectionVoice.stopSpeechInput();
+                },
+              ),
+            ],
           )
         ),
       ),

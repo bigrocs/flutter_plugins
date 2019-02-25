@@ -36,4 +36,7 @@ android {
 
 dependencies {
     implementation files('libs/com.baidu.tts_2.3.2.20180713_6101c2a.jar')
+    implementation files('libs/bdasr_V3_20180801_d6f298a.jar')
+    implementation files('libs/EventBus-2.4.jar')
+    implementation files('libs/pinyin4j-2.5.0.jar')
 }
