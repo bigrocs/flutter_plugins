@@ -963,12 +963,10 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback,
     fieldvalue = null;
   }
   private void result(Intent intent){
-    String number=intent.getStringExtra("number");
-    String color=intent.getStringExtra("color");
-    String path=intent.getStringExtra("path");
+    String number = intent.getStringExtra("number");
+    String color = intent.getStringExtra("color");
+    String path = intent.getStringExtra("path");
     Log.e("console", "path: "+intent.getStringExtra("path") );
-//    Toast.makeText(this.getApplicationContext(),""+number+color,Toast.LENGTH_SHORT).show();
-
     Log.e("console", "result: "+""+number+color);
     EventBus.getDefault().post(new SpiteBackEvent(number,color,path));
     finish();
