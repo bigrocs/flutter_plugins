@@ -9,6 +9,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.ice.iceplate.ActivateService;
+import com.ice.iceplate.RecogService;
 
 
 public class SpiteUtil {
@@ -58,8 +59,6 @@ public class SpiteUtil {
     public void init() {
         Intent actiIntent = new Intent(activity, ActivateService.class);
         activity.bindService(actiIntent, acConnection, Service.BIND_AUTO_CREATE);
-
-
     }
 
     public void spite(boolean s) {

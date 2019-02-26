@@ -752,7 +752,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback,
               opts.inPurgeable = true;
               bitmap1 = Bitmap.createBitmap(datas, preWidth,
                 preHeight,
-                android.graphics.Bitmap.Config.ARGB_8888);
+                Bitmap.Config.ARGB_8888);
             }
             camera.stopPreview();
             camera.setPreviewCallback(null);
@@ -899,7 +899,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback,
             opts.inPurgeable = true;
             bitmap1 = Bitmap.createBitmap(datas, preWidth,
               preHeight,
-              android.graphics.Bitmap.Config.ARGB_8888);
+              Bitmap.Config.ARGB_8888);
           }
           Matrix matrix = new Matrix();
           matrix.reset();

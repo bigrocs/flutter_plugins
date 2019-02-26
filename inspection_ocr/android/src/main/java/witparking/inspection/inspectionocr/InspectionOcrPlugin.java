@@ -1,5 +1,12 @@
 package witparking.inspection.inspectionocr;
 
+import com.ypy.eventbus.EventBus;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -13,8 +20,10 @@ public class InspectionOcrPlugin implements MethodCallHandler {
 
     private static Registrar registrar;
     private SpiteUtil spiteUtil;
+    private Result recognitionResult;
 
     private InspectionOcrPlugin() {
+        EventBus.getDefault().register(this);
         spiteUtil = new SpiteUtil(InspectionOcrPlugin.registrar.activity());
         spiteUtil.init();
     }
@@ -34,11 +43,20 @@ public class InspectionOcrPlugin implements MethodCallHandler {
     public void onMethodCall(MethodCall call, Result result) {
         switch (call.method) {
             case "recognitionTheplate":
-                spiteUtil.spite(false);
+                recognitionResult = result;
+                spiteUtil.spite(true);
                 break;
             default:
                 result.notImplemented();
                 break;
         }
+    }
+
+    public void onEventMainThread(SpiteBackEvent event) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("number", event.number);
+        map.put("color", event.color);
+        map.put("path", event.path);
+        recognitionResult.success(map);
     }
 }
