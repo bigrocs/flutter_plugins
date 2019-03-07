@@ -17,6 +17,8 @@ public class BMapViewFactory extends PlatformViewFactory {
     public BMapViewFactory(MessageCodec<Object> createArgsCodec, PluginRegistry.Registrar registrar) {
         super(createArgsCodec);
         this.registrar = registrar;
+        mapView = new SIMapView(registrar.activity());
+        mapView.mMapView.onPause();
     }
 
     @Override
@@ -27,13 +29,15 @@ public class BMapViewFactory extends PlatformViewFactory {
                 if (mapView == null) {
                     mapView = new SIMapView(registrar.activity());
                 }
+                mapView.mMapView.onResume();
+                mapView.startLocationUser();
                 return mapView;
             }
 
             @Override
             public void dispose() {
-                mapView.mMapView.onDestroy();
-                mapView = null;
+                mapView.mMapView.onPause();
+                //mapView = null;
             }
         };
     }

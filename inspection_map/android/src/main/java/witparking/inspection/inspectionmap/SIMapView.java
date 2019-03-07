@@ -55,7 +55,7 @@ public class SIMapView extends LinearLayout {
     /*
      * 开始定位用户位置
      * */
-    private void startLocationUser() {
+    public void startLocationUser() {
         //声明LocationClient类
         mLocationClient = new LocationClient(getContext());
         //注册监听函数
