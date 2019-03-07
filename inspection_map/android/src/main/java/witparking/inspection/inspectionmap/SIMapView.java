@@ -1,6 +1,9 @@
 package witparking.inspection.inspectionmap;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Matrix;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
@@ -10,8 +13,12 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 
 public class SIMapView extends LinearLayout {
@@ -32,6 +39,8 @@ public class SIMapView extends LinearLayout {
         mMapView.getMap().setMyLocationEnabled(true);
         mMapView.showZoomControls(false);
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomTo(18));
+
+        startLocationUser();
     }
 
     public SIMapView(Context context, AttributeSet attrs) {
@@ -68,6 +77,7 @@ public class SIMapView extends LinearLayout {
                 //获取定位类型、定位错误返回码，具体信息可参照类参考中BDLocation类中的说明
 
                 userLocation = bdLocation;
+                showUserLocation();
                 //停止定位
                 mLocationClient.stop();
             }
@@ -125,5 +135,48 @@ public class SIMapView extends LinearLayout {
         mLocationClient.start();
         //mLocationClient为第二步初始化过的LocationClient对象
         //调用LocationClient的start()方法，便可发起定位请求
+    }
+
+    /*
+     * 显示用户位置
+     * */
+    private void showUserLocation() {
+
+        // 开启定位图层
+        mBaiduMap.setMyLocationEnabled(true);
+
+        // 构造定位数据
+        MyLocationData locData = new MyLocationData.Builder()
+                .accuracy(userLocation.getRadius())
+                // 此处设置开发者获取到的方向信息，顺时针0-360
+                .direction(100).latitude(userLocation.getLatitude())
+                .longitude(userLocation.getLongitude()).build();
+
+        // 设置定位数据
+        mBaiduMap.setMyLocationData(locData);
+
+        // 设置定位图层的配置（定位模式，是否允许方向信息，用户自定义定位图标）
+        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.map_icon_location2x);
+        float scaleWidth = (42.f / 1.5f) / bitmap.getBitmap().getWidth();
+        float scaleHeight = (70.f / 1.5f) / bitmap.getBitmap().getHeight();
+        // 取得想要缩放的matrix參數
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        // 新的图片
+        Bitmap newBm = Bitmap.createBitmap(bitmap.getBitmap(), 0, 0, bitmap.getBitmap().getWidth(), bitmap.getBitmap().getHeight(), matrix, true);
+        bitmap = BitmapDescriptorFactory.fromBitmap(newBm);
+
+        MyLocationConfiguration config = new MyLocationConfiguration(
+                MyLocationConfiguration.LocationMode.FOLLOWING,
+                false,
+                bitmap,
+                Color.TRANSPARENT,
+                Color.TRANSPARENT
+        );
+
+        mBaiduMap.setMyLocationConfiguration(config);
+
+        // 当不需要定位图层时关闭定位图层
+        //mBaiduMap.setMyLocationEnabled(false);
     }
 }

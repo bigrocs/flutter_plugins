@@ -32,6 +32,22 @@ class InspectionMap {
   }
 
   /*
+  * 展示地图
+  * */
+  static Future showMapView() async {
+    dynamic res = await _channel.invokeMethod('showMapView');
+    return res;
+  }
+
+  /*
+  * 放置大头针
+  * */
+  static Future placePin() async {
+    dynamic res = await _channel.invokeMethod('placePin');
+    return res;
+  }
+
+  /*
   * 监听用户定位变化
   * */
   static StreamSubscription _subscription = null;

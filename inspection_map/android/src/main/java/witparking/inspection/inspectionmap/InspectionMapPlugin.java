@@ -59,7 +59,7 @@ public class InspectionMapPlugin implements MethodCallHandler {
             }
         });
 
-        registrar.platformViewRegistry().registerViewFactory("MapView", new BMapViewFactory(new StandardMessageCodec(), new SIMapView(registrar.activity())));
+
     }
 
     @Override
@@ -74,6 +74,11 @@ public class InspectionMapPlugin implements MethodCallHandler {
                 break;
             case "getUserLocation":
                 getUserLocation(result);
+                break;
+            case "showMapView":
+                registrar.platformViewRegistry().registerViewFactory("MapView", new BMapViewFactory(new StandardMessageCodec(), new SIMapView(registrar.activity())));
+                break;
+            case "placePin":
                 break;
             default:
                 result.notImplemented();

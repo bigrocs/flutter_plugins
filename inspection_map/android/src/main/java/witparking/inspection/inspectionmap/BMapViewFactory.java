@@ -27,7 +27,8 @@ public class BMapViewFactory extends PlatformViewFactory {
 
             @Override
             public void dispose() {
-
+                mapView.mMapView.onDestroy();
+                mapView = null;
             }
         };
     }
