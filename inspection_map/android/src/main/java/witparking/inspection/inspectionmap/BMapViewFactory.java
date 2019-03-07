@@ -5,16 +5,18 @@ import android.view.View;
 
 
 import io.flutter.plugin.common.MessageCodec;
+import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugin.platform.PlatformView;
 import io.flutter.plugin.platform.PlatformViewFactory;
 
 public class BMapViewFactory extends PlatformViewFactory {
 
     private SIMapView mapView;
+    private PluginRegistry.Registrar registrar;
 
-    public BMapViewFactory(MessageCodec<Object> createArgsCodec, SIMapView mapView) {
+    public BMapViewFactory(MessageCodec<Object> createArgsCodec, PluginRegistry.Registrar registrar) {
         super(createArgsCodec);
-        this.mapView = mapView;
+        this.registrar = registrar;
     }
 
     @Override
@@ -22,6 +24,9 @@ public class BMapViewFactory extends PlatformViewFactory {
         return new PlatformView() {
             @Override
             public View getView() {
+                if (mapView == null) {
+                    mapView = new SIMapView(registrar.activity());
+                }
                 return mapView;
             }
 

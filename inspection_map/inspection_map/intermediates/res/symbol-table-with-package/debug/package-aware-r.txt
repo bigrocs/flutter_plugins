@@ -1,0 +1,4 @@
+witparking.inspection.inspectionmap
+drawable map_icon_location2x
+id bmapView
+layout map_view
