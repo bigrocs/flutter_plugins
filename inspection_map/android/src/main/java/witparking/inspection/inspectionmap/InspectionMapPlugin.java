@@ -1,6 +1,8 @@
 package witparking.inspection.inspectionmap;
 
 
+import com.baidu.mapapi.map.MapView;
+
 import java.util.HashMap;
 
 import io.flutter.plugin.common.EventChannel;
@@ -9,6 +11,7 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
+import io.flutter.plugin.common.StandardMessageCodec;
 
 /**
  * InspectionMapPlugin
@@ -56,6 +59,7 @@ public class InspectionMapPlugin implements MethodCallHandler {
             }
         });
 
+        registrar.platformViewRegistry().registerViewFactory("MapView", new BMapViewFactory(new StandardMessageCodec(), new SIMapView(registrar.activity())));
     }
 
     @Override
@@ -100,4 +104,5 @@ public class InspectionMapPlugin implements MethodCallHandler {
             }
         });
     }
+
 }
