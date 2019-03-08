@@ -12,6 +12,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 import io.flutter.plugin.common.StandardMessageCodec;
+import io.flutter.plugin.platform.PlatformView;
 
 /**
  * InspectionMapPlugin
@@ -22,6 +23,8 @@ public class InspectionMapPlugin implements MethodCallHandler {
     private static EventChannel.EventSink eventSink;
 
     private LBSTrace lbsTrace;
+
+    private static BMapViewFactory bMapViewFactory;
 
     private InspectionMapPlugin() {
         lbsTrace = new LBSTrace();
@@ -59,7 +62,11 @@ public class InspectionMapPlugin implements MethodCallHandler {
             }
         });
 
-        registrar.platformViewRegistry().registerViewFactory("MapView", new BMapViewFactory(new StandardMessageCodec(), registrar));
+        /*
+        * Android View
+        * */
+        bMapViewFactory = new BMapViewFactory(new StandardMessageCodec(), registrar);
+        registrar.platformViewRegistry().registerViewFactory("MapView", bMapViewFactory);
     }
 
     @Override

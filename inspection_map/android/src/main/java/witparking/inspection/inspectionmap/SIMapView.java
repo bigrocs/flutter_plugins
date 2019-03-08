@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
@@ -17,9 +18,19 @@ import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class SIMapView extends LinearLayout {
 
@@ -178,5 +189,37 @@ public class SIMapView extends LinearLayout {
 
         // 当不需要定位图层时关闭定位图层
         //mBaiduMap.setMyLocationEnabled(false);
+    }
+
+    public void addOverlaysToMapView(JSONArray array) {
+
+        mBaiduMap.clear();
+        List<OverlayOptions> list = new LinkedList<OverlayOptions>();
+        for (int i = 0; i < array.length(); i++) {
+
+            try {
+                JSONObject jsonObject = array.getJSONObject(i);
+                LatLng point = new LatLng(jsonObject.getDouble("latitude"), jsonObject.getDouble("longitude"));
+                //构建Marker图标
+                BitmapDescriptor bitmap = BitmapDescriptorFactory
+                        .fromResource(R.drawable.map_icon_park_small3x);
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("index", i);
+                bundle.putBoolean("select", false);
+                //构建MarkerOption，用于在地图上添加Marker
+                OverlayOptions option = new MarkerOptions()
+                        .position(point)
+                        .icon(bitmap)
+                        .extraInfo(bundle);
+
+                list.add(option);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+        mBaiduMap.clear();
+        mBaiduMap.addOverlays(list);
     }
 }

@@ -11,7 +11,7 @@ import io.flutter.plugin.platform.PlatformViewFactory;
 
 public class BMapViewFactory extends PlatformViewFactory {
 
-    private SIMapView mapView;
+    public SIMapView mapView;
     private PluginRegistry.Registrar registrar;
 
     public BMapViewFactory(MessageCodec<Object> createArgsCodec, PluginRegistry.Registrar registrar) {
