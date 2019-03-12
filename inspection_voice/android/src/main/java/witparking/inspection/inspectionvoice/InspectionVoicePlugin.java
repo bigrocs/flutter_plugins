@@ -1,5 +1,7 @@
 package witparking.inspection.inspectionvoice;
 
+import com.ypy.eventbus.EventBus;
+
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -13,9 +15,11 @@ public class InspectionVoicePlugin implements MethodCallHandler {
 
     private static Registrar registrar;
     private Speech speech;
+    Result result;
 
     private InspectionVoicePlugin() {
         speech = new Speech(InspectionVoicePlugin.registrar.activity());
+        EventBus.getDefault().register(this);
     }
 
     /**
@@ -37,6 +41,7 @@ public class InspectionVoicePlugin implements MethodCallHandler {
                 speech.startASR();
                 break;
             case "stopSpeechInput":
+                this.result = result;
                 speech.stopASR();
                 break;
             default:
@@ -50,5 +55,11 @@ public class InspectionVoicePlugin implements MethodCallHandler {
     private void speechSynthesis(MethodCall call) {
         TTSUtil ttsUtil = new TTSUtil(InspectionVoicePlugin.registrar.activity());
         ttsUtil.add((String) call.argument("words"));
+    }
+
+    public void onEvent(VoiceInputEvent event) {
+        if (event.message != null) {
+            result.success(event.message);
+        }
     }
 }
