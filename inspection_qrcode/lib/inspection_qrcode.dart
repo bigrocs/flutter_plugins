@@ -18,7 +18,7 @@ class InspectionQrcode {
   * 生成二维码
   * */
   static Future createQRCode(String content) async {
-    String res = await _channel.invokeMethod('createQRCode', {content: content});
+    String res = await _channel.invokeMethod('createQRCode', {'content': content});
     return res;
   }
 
