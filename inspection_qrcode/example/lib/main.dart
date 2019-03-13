@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
               color: Colors.red,
             ),
             onTap: () {
-              InspectionQrcode.startScan();
+              InspectionQrcode.createQRCode("石文东大傻子");
             },
           )
         ),

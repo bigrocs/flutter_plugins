@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d2897bd7-5135-405a-b397-7f980564d8ff" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionvoice/InspectionVoicePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionvoice/InspectionVoicePlugin.java" afterDir="false" />
-    </list>
+    <list default="true" id="d2897bd7-5135-405a-b397-7f980564d8ff" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -49,7 +47,7 @@
     <session id="459538898">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.3" value="1" />
