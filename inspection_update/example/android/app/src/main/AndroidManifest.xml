@@ -14,7 +14,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="inspection_update_example"
+        android:label="石文东"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

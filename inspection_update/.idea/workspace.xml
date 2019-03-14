@@ -3,89 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="01974c83-c816-4cd0-872a-06f7a6b15127" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../inspection_ocr/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../inspection_ocr/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/.idea/libraries/Dart_SDK.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/.idea/libraries/Flutter_for_Android.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/.idea/runConfigurations/example_lib_main_dart.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/android/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/android/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/android/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/android/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/android/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/android/src/main/java/witparking/inspection/inspectionupdate/InspectionUpdatePlugin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/android/app/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/android/app/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/android/app/src/main/java/witparking/inspection/inspectionupdateexample/MainActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/android/app/src/main/res/drawable/launch_background.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/android/app/src/main/res/values/styles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/android/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/android/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/android/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Flutter/AppFrameworkInfo.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Flutter/Debug.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Flutter/Release.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Podfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/AppDelegate.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/AppDelegate.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Base.lproj/LaunchScreen.storyboard" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Base.lproj/Main.storyboard" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/ios/Runner/main.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/lib/main.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/pubspec.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/example/test/widget_test.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/inspection_update.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/ios/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/ios/Assets/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/ios/Classes/InspectionUpdatePlugin.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/ios/Classes/InspectionUpdatePlugin.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/ios/inspection_update.podspec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/lib/inspection_update.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inspection_update/pubspec.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionupdate/InspectionUpdatePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionupdate/InspectionUpdatePlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/inspection_update.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/inspection_update.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -107,18 +30,55 @@
           <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="dart" value="67" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Dart" value="67" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="gradle" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Groovy" value="1" />
+        </counts>
+      </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/inspection_update.dart">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="9" column="74" selection-start-line="9" selection-start-column="74" selection-end-line="9" selection-end-column="74" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="36" column="10" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -126,13 +86,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="-1586" />
-    <option name="y" value="93" />
-    <option name="width" value="1245" />
-    <option name="height" value="777" />
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/android/build.gradle" />
+        <option value="$PROJECT_DIR$/lib/inspection_update.dart" />
+        <option value="$PROJECT_DIR$/example/lib/main.dart" />
+      </list>
+    </option>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-1920" />
+    <option name="y" value="23" />
+    <option name="width" value="1920" />
+    <option name="height" value="1057" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -140,6 +111,31 @@
     <panes>
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="inspection_update" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inspection_update" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="inspection_update" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inspection_update" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="inspection_update" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inspection_update" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="inspection_update" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inspection_update" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
         <option name="show-excluded-files" value="false" />
       </pane>
       <pane id="AndroidView" />
@@ -177,7 +173,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1586" y="93" width="1245" height="777" extended-state="1" />
+    <frame x="-1920" y="23" width="1920" height="1057" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Structure" side_tool="true" />
       <window_info id="Favorites" side_tool="true" />
@@ -186,8 +183,8 @@
       <window_info id="Designer" />
       <window_info id="Captures" side_tool="true" />
       <window_info id="Capture Tool" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24937657" />
-      <window_info active="true" anchor="bottom" id="Dart Analysis" visible="true" weight="0.32930514" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16240682" />
+      <window_info anchor="bottom" id="Dart Analysis" visible="true" weight="0.2314225" />
       <window_info anchor="bottom" id="Run" />
       <window_info anchor="bottom" id="Logcat" />
       <window_info anchor="bottom" id="TODO" />
@@ -209,11 +206,26 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/android/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/inspection_update.dart">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="9" column="74" selection-start-line="9" selection-start-column="74" selection-end-line="9" selection-end-column="74" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="36" column="10" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
