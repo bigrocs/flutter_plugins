@@ -30,7 +30,7 @@ android {
 }
 
 dependencies {
-    implementation files('libs/EventBus-2.4.jar')
+    compileOnly files('libs/EventBus-2.4.jar')
     implementation 'com.squareup.okhttp:okhttp:2.4.0'
     implementation 'com.android.support:support-v4:27.1.1'
 }
