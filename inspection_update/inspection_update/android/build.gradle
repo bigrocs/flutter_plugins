@@ -1,5 +1,6 @@
-group 'witparking.inspection.inspectionocr'
+group 'witparking.inspection.inspectionupdate'
 version '1.0-SNAPSHOT'
+
 buildscript {
     repositories {
         google()
@@ -10,13 +11,16 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.2.1'
     }
 }
+
 rootProject.allprojects {
     repositories {
         google()
         jcenter()
     }
 }
+
 apply plugin: 'com.android.library'
+
 android {
     compileSdkVersion 27
 
@@ -27,14 +31,4 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
-    }
-}
-
-dependencies {
-    compileOnly files('libs/EventBus-2.4.jar')
-    implementation files('libs/iceplate.jar')
 }
