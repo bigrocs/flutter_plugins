@@ -33,7 +33,8 @@ public class InspectionUpdatePlugin implements MethodCallHandler {
     if (call.method.equals("update")) {
       String url = call.argument("url");
       AppUpdateUtils appUpdateUtils = new AppUpdateUtils(InspectionUpdatePlugin.registrar.activity());
-      String fileName = "巡检端" + new Date().getTime() + ".apk";
+      //String fileName = "WP" + new Date().getTime() + ".apk";
+      String fileName = "巡检端.apk";
       appUpdateUtils.downloadAppWithUrl(url, fileName);
     } else {
       result.notImplemented();

@@ -32,7 +32,7 @@ public class DeviceUtils {
      */
     public static void initLockScreen(Context context){
         policyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-        componentName = new ComponentName(context,DeviceUtils.AdminReceiver.class);
+        componentName = new ComponentName(context, AdminReceiver.class);
     }
 
     /**

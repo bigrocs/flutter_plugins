@@ -166,7 +166,7 @@ public class AppUpdateUtils {
 
         Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.setAction(Intent.ACTION_VIEW);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Uri apkUri = FileProvider.getUriForFile(mContext, mContext.getPackageName() + ".provider", file);
@@ -180,6 +180,7 @@ public class AppUpdateUtils {
         }
 
         mContext.startActivity(intent);
+        //android.os.Process.killProcess(android.os.Process.myPid());
     }
 
 
