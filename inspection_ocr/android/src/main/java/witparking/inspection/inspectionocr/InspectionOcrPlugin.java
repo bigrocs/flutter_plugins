@@ -80,9 +80,7 @@ public class InspectionOcrPlugin implements MethodCallHandler {
             }
 
             byte[] bitmapBytes = baos.toByteArray();
-            String res = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
-            res = "data:image/png;base64," + res;
-            base64Image = res;
+            base64Image = Base64.encodeToString(bitmapBytes, Base64.NO_WRAP);
         }
 
         Map<String, String> map = new HashMap<String, String>();

@@ -8,6 +8,8 @@ import com.ypy.eventbus.EventBus;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -61,10 +63,8 @@ public class InspectionQrcodePlugin implements MethodCallHandler {
                 }
 
                 byte[] bitmapBytes = baos.toByteArray();
-                String res = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
-                res = "data:image/png;base64," + res;
-                base64Image = res;
-                result.success(res);
+                base64Image = Base64.encodeToString(bitmapBytes, Base64.NO_WRAP);
+                result.success(base64Image);
                 break;
             default:
                 break;

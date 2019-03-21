@@ -1,5 +1,8 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:inspection_qrcode/inspection_qrcode.dart';
@@ -14,6 +17,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
 
+  Uint8List bytes = Uint8List(0);
+  
   @override
   void initState() {
     super.initState();
@@ -32,17 +37,26 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: GestureDetector(
-            child: Container(
-              width: 100,
-              height: 100,
-              color: Colors.red,
+        body: Column(
+          children: <Widget>[
+            GestureDetector(
+              child: Container(
+                width: 100,
+                height: 100,
+                color: Colors.red,
+              ),
+              onTap: () {
+                Future future = InspectionQrcode.createQRCode("石文东大傻子");
+                future.then((dynamic res) {
+                  setState(() {
+                    bytes = Base64Codec().decode(res);
+                    print(bytes);
+                  });
+                });
+              },
             ),
-            onTap: () {
-              InspectionQrcode.createQRCode("石文东大傻子");
-            },
-          )
+            Image.memory(bytes)
+          ],
         ),
       ),
     );
