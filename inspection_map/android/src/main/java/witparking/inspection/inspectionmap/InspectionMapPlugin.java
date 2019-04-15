@@ -1,9 +1,12 @@
 package witparking.inspection.inspectionmap;
 
 
+import android.util.Log;
+
 import com.baidu.mapapi.map.MapView;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
@@ -20,15 +23,15 @@ import io.flutter.plugin.platform.PlatformView;
 public class InspectionMapPlugin implements MethodCallHandler {
 
     private static Registrar registrar;
-    private static EventChannel.EventSink eventSink;
+    private static EventChannel.EventSink locEventSink;
+    private static EventChannel.EventSink hawEventSink;
 
     private LBSTrace lbsTrace;
 
     private static BMapViewFactory bMapViewFactory;
 
     private InspectionMapPlugin() {
-        lbsTrace = new LBSTrace();
-        lbsTrace.init(InspectionMapPlugin.registrar.activity());
+
     };
 
     /**
@@ -45,7 +48,7 @@ public class InspectionMapPlugin implements MethodCallHandler {
         message_channel.setStreamHandler(new EventChannel.StreamHandler() {
             @Override
             public void onListen(Object o, final EventChannel.EventSink eventSink) {
-                InspectionMapPlugin.eventSink = eventSink;
+                InspectionMapPlugin.locEventSink = eventSink;
 
                 LBSLocation lbsLocation = new LBSLocation(registrar.activity());
                 lbsLocation.start(new LocationInterface() {
@@ -58,7 +61,20 @@ public class InspectionMapPlugin implements MethodCallHandler {
 
             @Override
             public void onCancel(Object o) {
-                InspectionMapPlugin.eventSink = null;
+                InspectionMapPlugin.locEventSink = null;
+            }
+        });
+
+        final EventChannel hawEyeMessageChannel = new EventChannel(registrar.messenger(), "map.event.hawk_eye");
+        hawEyeMessageChannel.setStreamHandler(new EventChannel.StreamHandler() {
+            @Override
+            public void onListen(Object o, final EventChannel.EventSink eventSink) {
+                InspectionMapPlugin.hawEventSink = eventSink;
+            }
+
+            @Override
+            public void onCancel(Object o) {
+                InspectionMapPlugin.hawEventSink = null;
             }
         });
 
@@ -95,8 +111,22 @@ public class InspectionMapPlugin implements MethodCallHandler {
     /*
      * 开启鹰眼轨迹
      * */
-    private void startGather(MethodCall call, Result result) {
-        lbsTrace.start((String) call.argument("entity"));
+    private void startGather(MethodCall call, final Result result) {
+        if (lbsTrace != null) {
+            lbsTrace.stop();
+            lbsTrace = null;
+        }
+        lbsTrace = new LBSTrace();
+        lbsTrace.init(InspectionMapPlugin.registrar.activity());
+        lbsTrace.start((String) call.argument("entity"), new TraceInterface() {
+            @Override
+            public void onRes(Map res) {
+                Log.e("鹰眼", res.toString());
+                if (hawEventSink != null) {
+                    hawEventSink.success(res);
+                }
+            }
+        });
         result.success("成功开启鹰眼轨迹");
     }
 
