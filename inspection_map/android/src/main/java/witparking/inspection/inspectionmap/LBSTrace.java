@@ -107,8 +107,7 @@ public class LBSTrace {
         int gatherInterval = 10;
         // 打包周期
         int packInterval = 60;
-        // http协议类型
-        int protocolType = 1;
+
         // 设置采集和打包周期
         client.setInterval(gatherInterval, packInterval);
         // 设置定位模式
@@ -151,7 +150,6 @@ public class LBSTrace {
             }
         };
         int delay = 1000 * 60 * 10;
-        delay = 3 * 1000;
         timer.schedule(task, delay, delay);
     }
 
@@ -172,7 +170,7 @@ public class LBSTrace {
                 HttpURLConnection connection = null;
                 try {
 
-                    String urls = "http://api.map.baidu.com/trace/v2/track/gethistory?ak=pOQMoT522zMAAG5mLE6Me26w" +
+                    String urls = "http://api.map.baidu.com/trace/v2/track/gethistory?ak=CvjbCcdFDITe9gokNbtMYpMMSldWC3WK" +
                             "&service_id=" + serviceId +
                             "&start_time=" + starttime +
                             "&end_time=" + endtime +
@@ -181,7 +179,7 @@ public class LBSTrace {
                             "&page_size=" + 3000 +
                             "&is_processed=" + 1 +
                             "&process_option=" + "need_denoise=1,radius_threshold=0,need_vacuate=1,need_mapmatch=1,radius_threhold=0,transport_mode=walking" +
-                            "&mcode=" + "5B:BA:78:D8:3A:78:75:BE:CD:F5:9D:E1:3F:49:4C:6B:A3:B1:58:4F;com.rpms.sdmandroid";
+                            "&mcode=" + "06:38:44:D8:39:22:C1:30:0C:75:D9:26:E6:A3:1C:4B:12:49:BF:86;com.rpms.sdmandroid";
                     URL url = new URL(urls);
                     Log.e("console", "url:" + url.toString());
                     connection = (HttpURLConnection) url.openConnection();
