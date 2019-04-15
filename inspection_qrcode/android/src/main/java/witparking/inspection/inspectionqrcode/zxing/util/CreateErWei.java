@@ -8,7 +8,9 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 
 public class CreateErWei {
 
@@ -20,10 +22,16 @@ public class CreateErWei {
             if (url == null || "".equals(url) || url.length() < 1) {
                 return null;
             }
-            Hashtable<EncodeHintType, String> hints = new Hashtable<EncodeHintType, String>();
+            Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
+            hints.put(EncodeHintType.MARGIN, 5);
             hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
             //图像数据转换，使用了矩阵转换
             BitMatrix bitMatrix = new QRCodeWriter().encode(url, BarcodeFormat.QR_CODE, QR_WIDTH, QR_HEIGHT, hints);
+
+            bitMatrix = deleteWhite(bitMatrix);
+            QR_WIDTH = bitMatrix.getWidth();
+            QR_HEIGHT = bitMatrix.getHeight();
+
             int[] ints = bitMatrix.getTopLeftOnBit();
             int[] pixels = new int[QR_WIDTH * QR_HEIGHT];
             //下面这里按照二维码的算法，逐个生成二维码的图片，
@@ -56,5 +64,21 @@ public class CreateErWei {
         src[1] = (byte) ((value >> 8) & 0xFF);
         src[0] = (byte) (value & 0xFF);
         return src;
+    }
+
+    public static BitMatrix deleteWhite(BitMatrix matrix){
+        int[] rec = matrix.getEnclosingRectangle();
+        int resWidth = rec[2] + 1;
+        int resHeight = rec[3] + 1;
+
+        BitMatrix resMatrix = new BitMatrix(resWidth, resHeight);
+        resMatrix.clear();
+        for (int i = 0; i < resWidth; i++) {
+            for (int j = 0; j < resHeight; j++) {
+                if (matrix.get(i + rec[0], j + rec[1]))
+                    resMatrix.set(i, j);
+            }
+        }
+        return resMatrix;
     }
 }
