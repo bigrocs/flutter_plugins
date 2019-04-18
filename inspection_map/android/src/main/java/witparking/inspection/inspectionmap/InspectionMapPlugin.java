@@ -93,7 +93,10 @@ public class InspectionMapPlugin implements MethodCallHandler {
                 startGather(call, result);
                 break;
             case "stopGather":
-                lbsTrace.stop();
+                if (lbsTrace != null) {
+                    lbsTrace.stop();
+                    lbsTrace = null;
+                }
                 break;
             case "getUserLocation":
                 getUserLocation(result);
