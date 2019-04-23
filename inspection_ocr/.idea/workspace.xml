@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9c61c6f-aab7-4e0b-83e0-c3a82123e42d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionocr/InspectionOcrPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionocr/InspectionOcrPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../inspection_qrcode/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../inspection_qrcode/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../inspection_qrcode/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../inspection_qrcode/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../inspection_qrcode/android/src/main/java/witparking/inspection/inspectionqrcode/InspectionQrcodePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../inspection_qrcode/android/src/main/java/witparking/inspection/inspectionqrcode/InspectionQrcodePlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../inspection_qrcode/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../inspection_qrcode/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionocr/ViewfinderView.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionocr/ViewfinderView.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -25,13 +20,13 @@
     <session id="1311822557">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.2" value="3" />
           <entry key="project.open.time.3" value="2" />
-          <entry key="project.open.time.4" value="2" />
+          <entry key="project.open.time.4" value="3" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">

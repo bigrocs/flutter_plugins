@@ -45,7 +45,7 @@ public class ViewfinderView extends View {
 		if(minLength<1080||minLength>1620){
 			length = minLength/4;
 		}else{
-			length = 250;
+			length = minLength / 2 - 4;
 		}
 
 		left = width/2-length;
@@ -60,7 +60,7 @@ public class ViewfinderView extends View {
 		canvas.drawRect(frame.right + 1, frame.top, width, frame.bottom + 1,
 				paint);
 		canvas.drawRect(0, frame.bottom + 1, width, height, paint);
-		paintLine.setColor(Color.rgb(0, 255, 0));
+		paintLine.setColor(Color.rgb(0, 162, 255));
 		paintLine.setStrokeWidth(4);
 		paintLine.setAntiAlias(true);
 		canvas.drawLine(left, top, left +50, top, paintLine);
