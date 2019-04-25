@@ -1,0 +1,470 @@
+{
+  "messageDefinitions": [
+    {
+      "messageType": {
+        "id": 0,
+        "name":"InspectorMsgCallBack",
+        "type":35,
+        "version": "v1.0",
+        "title": "巡检端消息接收后callBack 协议类型35 协议版本1.0"
+      },
+      "fields": [
+        {
+          "id": 1,
+          "name": "msgId",
+          "desc": " 0xxxxx  string",
+          "type": "string"
+        },
+        {
+          "id": 46,
+          "name": "recTime",
+          "desc": " 0xxxxx  timestamp",
+          "type": "timestamp"
+        }
+      ]
+    },
+    {
+      "messageType": {
+        "id": 1,
+        "name":"ParkingSpaceStatusV3Key",
+        "type":35,
+        "version": "v1.0",
+        "title": "ParkingSpaceStatusV3Key 协议版本1.0"
+      },
+      "fields": [
+        {
+          "id": 1,
+          "name": "msgId",
+          "desc": " 0xxxxx  string",
+          "type": "string"
+        },
+        {
+          "id": 2,
+          "name": "title",
+          "desc": " 0xxxxx  string",
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "description",
+          "desc": "",
+          "type": "string"
+        },
+        {
+          "id": 11,
+          "desc": "",
+          "name": "content.parkingSpaceId",
+          "type": "string"
+        },
+        {
+          "id": 12,
+          "desc": "",
+          "name": "content.time",
+          "type": "timestamp"
+        },
+        {
+          "id": 13,
+          "desc": "",
+          "name": "content.voiceContent",
+          "type": "string"
+        },
+        {
+          "id": 14,
+          "desc": "",
+          "name": "content.isLongRent",
+          "type": "int8"
+        },
+        {
+          "id": 15,
+          "desc": "",
+          "name": "content.color",
+          "type": "string"
+        },
+        {
+          "id": 16,
+          "desc": "scaleFactor目前只在int32上处理",
+          "name": "content.debtBalance",
+          "type": "int32",
+          "scaleFactor": 100
+        },
+        {
+          "id": 17,
+          "desc": "",
+          "name": "content.userId",
+          "type": "string"
+        },
+        {
+          "id": 18,
+          "desc": "",
+          "name": "content.parkingSpaceStatus",
+          "type": "int8"
+        },
+        {
+          "id": 19,
+          "desc": "",
+          "name": "content.isParkIn",
+          "type": "int8"
+        },
+        {
+          "id": 20,
+          "desc": "",
+          "name": "content.isLowBalance",
+          "type": "int8"
+        },
+        {
+          "id": 21,
+          "desc": "",
+          "name": "createTime",
+          "type": "timestamp"
+        },
+        {
+          "id": 22,
+          "desc": "",
+          "name": "userId",
+          "type": "string"
+        },
+        {
+          "id": 23,
+          "desc": "",
+          "name": "actionEventKey",
+          "type": "string"
+        },
+        {
+          "id": 26,
+          "desc": "",
+          "name": "content.parkingAreaId",
+          "type": "string"
+        },
+        {
+          "id": 37,
+          "desc": "",
+          "name": "content.vehicleId",
+          "type": "string"
+        },
+        {
+          "id": 38,
+          "desc": "",
+          "name": "content.parkingSpaceCode",
+          "type": "string"
+        },
+        {
+          "id": 39,
+          "desc": "",
+          "name": "content.subject",
+          "type": "string"
+        },
+        {
+          "id": 40,
+          "desc": "",
+          "name": "content.parkingOrderIntoId",
+          "type": "string"
+        },
+        {
+          "id": 41,
+          "desc": "",
+          "name": "content.taskConfigKey",
+          "type": "string"
+        },
+        {
+          "id": 42,
+          "desc": "字符串类型的数组",
+          "name": "content.pic",
+          "type": "arrayString"
+        },
+        {
+          "id": 43,
+          "desc": "",
+          "name": "content.numplate",
+          "type": "string"
+        },
+        {
+          "id": 44,
+          "desc": "",
+          "name": "content.phoneNo",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "messageType": {
+        "id": 2,
+        "name": "TaskEventKey",
+        "type": 35,
+        "version": "v1.0",
+        "title": "TaskEventKey 协议版本1.0"
+      },
+      "fields": [
+        {
+          "id": 1,
+          "name": "msgId",
+          "desc": " 0xxxxx  string",
+          "type": "string"
+        },
+        {
+          "id": 2,
+          "name": "title",
+          "desc": " 0xxxxx  string",
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "desc": "",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "id": 13,
+          "desc": "",
+          "name": "content.voiceContent",
+          "type": "string"
+        },
+        {
+          "id": 37,
+          "desc": "",
+          "name": "content.vehicleId",
+          "type": "string"
+        },
+        {
+          "id": 38,
+          "desc": "",
+          "name": "content.parkingSpaceCode",
+          "type": "string"
+        },
+        {
+          "id": 39,
+          "desc": "",
+          "name": "content.subject",
+          "type": "string"
+        },
+        {
+          "id": 40,
+          "desc": "",
+          "name": "content.parkingOrderIntoId",
+          "type": "string"
+        },
+        {
+          "id": 41,
+          "desc": "",
+          "name": "content.taskConfigKey",
+          "type": "string"
+        },
+        {
+          "id": 42,
+          "desc": "",
+          "name": "content.pic",
+          "type": "arrayString"
+        },
+        {
+          "id": 43,
+          "desc": "",
+          "name": "content.numplate",
+          "type": "string"
+        },
+        {
+          "id": 11,
+          "desc": "",
+          "name": "content.parkingSpaceId",
+          "type": "string"
+        },
+        {
+          "id": 15,
+          "desc": "",
+          "name": "content.color",
+          "type": "string"
+        },
+        {
+          "id": 16,
+          "desc": "",
+          "name": "content.debtBalance",
+          "type": "int32",
+          "scaleFactor": 100
+        },
+        {
+          "id": 18,
+          "desc": "",
+          "name": "content.parkingSpaceStatus",
+          "type": "int32"
+        },
+        {
+          "id": 21,
+          "desc": "",
+          "name": "createTime",
+          "type": "timestamp"
+        },
+        {
+          "id": 22,
+          "desc": "",
+          "name": "userId",
+          "type": "string"
+        },
+        {
+          "id": 23,
+          "desc": "",
+          "name": "actionEventKey",
+          "type": "string"
+        },
+        {
+          "id": 24,
+          "desc": "",
+          "name": "content.taskId",
+          "type": "string"
+        },
+        {
+          "id": 25,
+          "desc": "",
+          "name": "content.isRegist",
+          "type": "int8"
+        },
+        {
+          "id": 26,
+          "desc": "",
+          "name": "content.parkingAreaId",
+          "type": "string"
+        },
+        {
+          "id": 27,
+          "desc": "",
+          "name": "content.isDeal",
+          "type": "int8"
+        },
+        {
+          "id": 28,
+          "desc": "",
+          "name": "content.intoDateTime",
+          "type": "timestamp"
+        },
+        {
+          "id": 29,
+          "desc": "",
+          "name": "content.hasTask",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "messageType": {
+        "id": 3,
+        "name": "CleanEyewinkerKey",
+        "type": 35,
+        "version": "v1.0",
+        "title": "CleanEyewinkerKey 协议版本1.0"
+      },
+      "fields": [
+        {
+          "id": 1,
+          "name": "msgId",
+          "desc": " 0xxxxx  string",
+          "type": "string"
+        },
+        {
+          "id": 2,
+          "name": "title",
+          "desc": " 0xxxxx  string",
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "desc": "",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "id": 37,
+          "desc": "",
+          "name": "content.vehicleId",
+          "type": "string"
+        },
+        {
+          "id": 38,
+          "desc": "",
+          "name": "content.parkingSpaceCode",
+          "type": "string"
+        },
+        {
+          "id": 39,
+          "desc": "",
+          "name": "content.subject",
+          "type": "string"
+        },
+        {
+          "id": 43,
+          "desc": "",
+          "name": "content.numplate",
+          "type": "string"
+        },
+        {
+          "id": 15,
+          "desc": "",
+          "name": "content.color",
+          "type": "string"
+        },
+        {
+          "id": 21,
+          "desc": "",
+          "name": "createTime",
+          "type": "timestamp"
+        },
+        {
+          "id": 22,
+          "desc": "",
+          "name": "userId",
+          "type": "string"
+        },
+        {
+          "id": 23,
+          "desc": "",
+          "name": "actionEventKey",
+          "type": "string"
+        },
+        {
+          "id": 24,
+          "desc": "",
+          "name": "content.taskId",
+          "type": "string"
+        },
+        {
+          "id": 30,
+          "desc": "",
+          "name": "content.createTime",
+          "type": "timestamp"
+        },
+        {
+          "id": 31,
+          "desc": "",
+          "name": "content.status",
+          "type": "int8"
+        },
+        {
+          "id": 32,
+          "desc": "",
+          "name": "content.content",
+          "type": "string"
+        },
+        {
+          "id": 33,
+          "desc": "",
+          "name": "content.duration",
+          "type": "int64"
+        },
+        {
+          "id": 34,
+          "desc": "",
+          "name": "content.objectId",
+          "type": "string"
+        },
+        {
+          "id": 35,
+          "desc": "",
+          "name": "content.clearBalance",
+          "type": "string"
+        },
+        {
+          "id": 36,
+          "desc": "",
+          "name": "content.assignmentKey",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}
