@@ -15,16 +15,18 @@ import com.landicorp.android.eptapi.exception.UnsupportMultiProcess;
 import java.io.ByteArrayOutputStream;
 
 import witparking.inspection.inspectionprinter.CreateErWei;
+import witparking.inspection.inspectionprinter.WPPrinter;
 
-public class LIANDI {
+public class LIANDI extends WPPrinter {
 
     private Activity activity;
     private Printer.Format format = new Printer.Format();
     private Printer printer;
 
-    LIANDI(Activity activity) {
+    public LIANDI(Activity activity) {
         this.activity = activity;
         bindDeviceService();
+
         try {
             progress.start();
         } catch (RequestException e) {
@@ -35,16 +37,17 @@ public class LIANDI {
     /*
        打印机流程控制
     */
-    private Printer.Progress progress = new Printer.Progress() {
+    public final Printer.Progress progress = new Printer.Progress() {
 
         @Override
         public void doPrint(Printer printer) throws Exception {
             format = new Printer.Format();
             format.setAscSize(Printer.Format.ASC_DOT5x7);
-            format.setAscScale(Printer.Format.ASC_SC1x2);
+            format.setAscScale(Printer.Format.ASC_SC1x1);
             printer.setFormat(format);
             //超出一行是否自动截断
             printer.setAutoTrunc(false);
+
             preparedForPrint(printer);
         }
 
@@ -76,7 +79,8 @@ public class LIANDI {
                 return true;
             }else
             {
-                callback.onError(getErrorDescription(code));
+                String msg = getErrorDescription(code);
+                callback.onError(msg);
             }
         } catch (RequestException e) {
             e.printStackTrace();
@@ -87,10 +91,15 @@ public class LIANDI {
     /*
     * 打印文本
     * */
-    public void printText(String text, LIANDIPrintInterface callback) {
+    public void printText(final String text, LIANDIPrintInterface callback) {
         if (!checkPrinterState(callback)) return;
         try {
-            printer.printText(text);
+            progress.addStep(new Printer.Step() {
+                @Override
+                public void doPrint(Printer printer) throws Exception {
+                    printer.printText(text);
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,7 +111,12 @@ public class LIANDI {
     public void printBlankLine(LIANDIPrintInterface callback) {
         if (!checkPrinterState(callback)) return;
         try {
-            printer.feedLine(1);
+            progress.addStep(new Printer.Step() {
+                @Override
+                public void doPrint(Printer printer) throws Exception {
+                    printer.printMid("\n");
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }

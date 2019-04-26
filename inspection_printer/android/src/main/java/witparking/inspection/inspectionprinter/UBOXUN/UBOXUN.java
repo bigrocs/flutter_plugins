@@ -9,13 +9,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import witparking.inspection.inspectionprinter.CreateErWei;
+import witparking.inspection.inspectionprinter.WPPrinter;
 
-public class UBOXUN {
+public class UBOXUN extends WPPrinter {
 
     Activity activity;
     private PrinterManager printerManager = new PrinterManager();
 
-    UBOXUN(Activity activity) {
+    public UBOXUN(Activity activity) {
         this.activity = activity;
         //打印机基本设定
         printerManager.prn_setSpeed(0);
@@ -43,12 +44,12 @@ public class UBOXUN {
     /*
      * 打印文本
      * */
-    void printText(String text, UBOXUNPrintInterface callback) {
+    public void printText(String text, UBOXUNPrintInterface callback) {
         if (!checkPrinterState(callback)) return;
         //状态正常开始打印
         printerManager.setupPage(384, -1);
         printerManager.drawTextEx(text, 5, 0, 384, -1, "arial", 26, 0, 0, 0);
-
+        printerManager.printPage(0);
     }
 
     /*
@@ -65,7 +66,7 @@ public class UBOXUN {
     /*
      * 打印图片
      * */
-    void printImage(String base64Image, UBOXUNPrintInterface callback) {
+    public void printImage(String base64Image, UBOXUNPrintInterface callback) {
         if (!checkPrinterState(callback)) return;
         Bitmap bitmap = null;
         try {

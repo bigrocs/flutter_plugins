@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 
 import com.smartdevicesdk.btprinter.BluetoothService;
 import com.smartdevicesdk.btprinter.ICoallBack;
@@ -20,14 +21,16 @@ import com.smartdevicesdk.btprinter.PrintService;
 
 import java.util.Set;
 
-public class ZKC {
+import witparking.inspection.inspectionprinter.WPPrinter;
+
+public class ZKC extends WPPrinter {
 
     private PrintService printService;
     private BluetoothAdapter bluetoothAdapter;
     Set<BluetoothDevice> pairedDevices;
     private Context _context;
 
-    ZKC(Context context) {
+    public ZKC(Context context) {
         this._context = context;
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -35,7 +38,26 @@ public class ZKC {
 
         printService = new PrintService(context);
 
+        //设置字体
+        printService.write(PrintCommand.set_FontStyle(0, 0, 0, 0, 0));
+    }
 
+    public void connect(final ZKCConnectionInterface zkcConnectionInterface) {
+
+        //设备已经连接
+        if (printService.isConnected()) {
+            printService.write(PrintCommand.set_Buzzer(2, 1));
+            zkcConnectionInterface.onConnect(true, "");
+            return;
+        }
+
+        // 手机上没有配对设备
+        if (pairedDevices.size() <= 0) {
+            zkcConnectionInterface.onConnect(false, "暂无配对设备，请打开手机设置，配对连接蓝牙设备");
+            return;
+        }
+
+        // 手机上存在蓝牙配对设备
         for (BluetoothDevice device : pairedDevices) {
             Intent intent = new Intent();
             intent.putExtra("device_address", device.getAddress());
@@ -49,6 +71,7 @@ public class ZKC {
                     case BluetoothService.STATE_CONNECTED:
                         // 连接成功蜂鸣器发声 可以打印
                         printService.write(PrintCommand.set_Buzzer(2, 1));
+                        zkcConnectionInterface.onConnect(true, "");
                         break;
                     case BluetoothService.STATE_CONNECTING:
                         // 正在连接
@@ -63,9 +86,6 @@ public class ZKC {
                 }
             }
         });
-
-        //设置字体
-        printService.write(PrintCommand.set_FontStyle(0, 0, 0, 0, 0));
     }
 
     /*
