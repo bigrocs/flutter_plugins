@@ -69,7 +69,7 @@ public class InspectionUpdatePlugin implements MethodCallHandler {
     }
   }
 
-  public void onEventMain(AppUpdateEvent event) {
+  public void onEvent(AppUpdateEvent event) {
     if (event.error.equals("")) {
       Map map = new HashMap();
       map.put("schedule", event.progress);
