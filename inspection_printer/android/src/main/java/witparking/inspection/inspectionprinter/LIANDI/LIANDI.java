@@ -1,4 +1,4 @@
-package witparking.inspection.inspectionprinter.LIANDI;
+package android.src.main.java.witparking.inspection.inspectionprinter.LIANDI;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -12,7 +12,10 @@ import com.landicorp.android.eptapi.exception.RequestException;
 import com.landicorp.android.eptapi.exception.ServiceOccupiedException;
 import com.landicorp.android.eptapi.exception.UnsupportMultiProcess;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
 
 import witparking.inspection.inspectionprinter.CreateErWei;
 import witparking.inspection.inspectionprinter.WPPrinter;
@@ -22,6 +25,7 @@ public class LIANDI extends WPPrinter {
     private Activity activity;
     private Printer.Format format = new Printer.Format();
     private Printer printer;
+    public ArrayList list;  //一次打印的数据
 
     public LIANDI(Activity activity) {
         this.activity = activity;
@@ -67,6 +71,44 @@ public class LIANDI extends WPPrinter {
     * */
     private void preparedForPrint(Printer printer) {
         this.printer = printer;
+        try {
+            doPrint();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
+    * 进行一项完整的打印工作
+    * */
+    private void doPrint() throws Exception {
+
+        for (Object item : list) {
+
+            String value = (String) item;
+
+            // base64图片
+            if (value.indexOf("pictureStream") == 0) {
+                String base64Image = value.split("pictureStream")[1];
+                Bitmap bitmap = null;
+                try {
+                    InputStream isBm = activity.getResources().getAssets().open("image240.bmp");
+                    printer.printImage(0, isBm);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else {
+                value += '\n';
+                printer.printText(value);
+            }
+        }
+
+        printer.printText(" \n");
+        printer.printText(" \n");
+        printer.printText(" \n");
+        printer.printText(" \n");
+        printer.printText(" \n");
+
     }
 
     /*
@@ -80,46 +122,12 @@ public class LIANDI extends WPPrinter {
             }else
             {
                 String msg = getErrorDescription(code);
-                callback.onError(msg);
+                if (callback != null) callback.onError(msg);
             }
         } catch (RequestException e) {
             e.printStackTrace();
         }
         return false;
-    }
-
-    /*
-    * 打印文本
-    * */
-    public void printText(final String text, LIANDIPrintInterface callback) {
-        if (!checkPrinterState(callback)) return;
-        try {
-            progress.addStep(new Printer.Step() {
-                @Override
-                public void doPrint(Printer printer) throws Exception {
-                    printer.printText(text);
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /*
-    * 打印空白行
-    * */
-    public void printBlankLine(LIANDIPrintInterface callback) {
-        if (!checkPrinterState(callback)) return;
-        try {
-            progress.addStep(new Printer.Step() {
-                @Override
-                public void doPrint(Printer printer) throws Exception {
-                    printer.printMid("\n");
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /*
@@ -149,14 +157,13 @@ public class LIANDI extends WPPrinter {
     /*
     * 打印图片
     * */
-    public void printImage(String base64Image, LIANDIPrintInterface callback) {
-        if (!checkPrinterState(callback)) return;
+    private void printImage(String base64Image, Printer p) {
         Bitmap bitmap = null;
         try {
             byte[] bitmapArray;
-            bitmapArray = Base64.decode(base64Image, Base64.DEFAULT);
+            bitmapArray = Base64.decode(base64Image, Base64.NO_WRAP);
             bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
-            printer.printImage(10, bitmap.getWidth(), bitmap.getHeight(), bitmapArray);
+            p.printImage(10, bitmap.getWidth(), bitmap.getHeight(), bitmapArray);
         } catch (Exception e) {
             e.printStackTrace();
         }

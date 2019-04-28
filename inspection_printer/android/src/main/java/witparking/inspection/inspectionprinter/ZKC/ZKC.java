@@ -1,4 +1,4 @@
-package witparking.inspection.inspectionprinter.ZKC;
+package android.src.main.java.witparking.inspection.inspectionprinter.ZKC;
 
 /*
 * 深圳市智谷联软件技术有限公司
@@ -31,6 +31,7 @@ public class ZKC extends WPPrinter {
     private Context _context;
 
     public ZKC(Context context) {
+
         this._context = context;
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -86,6 +87,19 @@ public class ZKC extends WPPrinter {
                 }
             }
         });
+    }
+
+    /*
+    * 检测打印机连接状态
+    * */
+    public boolean isConnected(ZKCConnectionInterface zkcConnectionInterface) {
+        if (printService.isConnected()) {
+            printService.write(PrintCommand.set_Buzzer(2, 1));
+            zkcConnectionInterface.onConnect(true, "");
+            return true;
+        }
+        zkcConnectionInterface.onConnect(false, "未连接");
+        return false;
     }
 
     /*

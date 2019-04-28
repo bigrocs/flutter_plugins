@@ -1,4 +1,4 @@
-package witparking.inspection.inspectionprinter.UBOXUN;
+package android.src.main.java.witparking.inspection.inspectionprinter.UBOXUN;
 
 public interface UBOXUNPrintInterface {
 

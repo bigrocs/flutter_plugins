@@ -1,4 +1,4 @@
-package witparking.inspection.inspectionprinter.UBOXUN;
+package android.src.main.java.witparking.inspection.inspectionprinter.UBOXUN;
 
 import android.app.Activity;
 import android.device.PrinterManager;
@@ -30,11 +30,11 @@ public class UBOXUN extends WPPrinter {
         //检测状态
         if (printerManager.getStatus() != 0) {
             if (printerManager.getStatus() == -1) {
-                callback.onError("打印机缺纸");
+                if (callback != null) callback.onError("打印机缺纸");
             } else if (printerManager.getStatus() == -2) {
-                callback.onError("打印头过热");
+                if (callback != null) callback.onError("打印头过热");
             } else {
-                callback.onError("打印机异常");
+                if (callback != null) callback.onError("打印机异常");
             }
             return false;
         }
@@ -61,6 +61,7 @@ public class UBOXUN extends WPPrinter {
         printerManager.setupPage(384, -1);
         Bitmap _img = new CreateErWei().createQRImage(content);
         printerManager.drawBitmap(_img, 10, 0);
+        printerManager.printPage(0);
     }
 
     /*
@@ -75,6 +76,7 @@ public class UBOXUN extends WPPrinter {
             bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
             printerManager.setupPage(384, -1);
             printerManager.drawBitmap(bitmap, 10, 0);
+            printerManager.printPage(0);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,6 +88,7 @@ public class UBOXUN extends WPPrinter {
     void printBlankLine(UBOXUNPrintInterface callback) {
         if (!checkPrinterState(callback)) return;
         printerManager.setupPage(384, -1);
+        printerManager.printPage(0);
         printerManager.printPage(0);
     }
 }

@@ -1,4 +1,4 @@
-package witparking.inspection.inspectionprinter.ZKC;
+package android.src.main.java.witparking.inspection.inspectionprinter.ZKC;
 
 public interface ZKCPrintInterface {
     void onError(String message);

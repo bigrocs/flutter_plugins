@@ -1,12 +1,14 @@
-package witparking.inspection.inspectionprinter;
+package android.src.main.java.witparking.inspection.inspectionprinter;
 
 import android.util.Log;
 
 import com.landicorp.android.eptapi.exception.RequestException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -54,6 +56,12 @@ public class InspectionPrinterPlugin implements MethodCallHandler {
     switch (call.method) {
       case "print":
         print(call, result);
+        break;
+      case "getBLEPrinterState":
+        getBLEPrinterState(result);
+        break;
+      case "connectToBLEPrinter":
+        connectToBLEPrinter(result);
         break;
       default:
         result.notImplemented();
@@ -142,13 +150,13 @@ public class InspectionPrinterPlugin implements MethodCallHandler {
     UBOXUN uboxun = (UBOXUN)wpPrinter;
 
     for (Object item : list) {
+
       String value = (String) item;
 
       // base64图片
       if (value.indexOf("pictureStream") == 0) {
         String base64Image = value.split("pictureStream")[1];
         try {
-          //Thread.sleep(600);
           uboxun.printImage(base64Image, null);
         } catch (Exception e) {
           e.printStackTrace();
@@ -177,22 +185,86 @@ public class InspectionPrinterPlugin implements MethodCallHandler {
     LIANDI liandi = (LIANDI)wpPrinter;
 
     try {
-      liandi.progress.start(true);
-      for (Object item : list) {
-        String value = (String) item;
-        value += '\n';
-        liandi.printText(value, new LIANDIPrintInterface() {
-          @Override
-          public void onError(String message) {
-
-          }
-        });
-      }
-    } catch (RequestException e) {
+      liandi.list = list;
+      liandi.progress.start();
+    } catch (Exception e) {
       e.printStackTrace();
     }
 
+  }
 
+  /*
+  * 蓝牙打印机连接状态
+  * */
+  private void getBLEPrinterState(final Result result) {
+
+    if ("UBX".equals(android.os.Build.MANUFACTURER)) {
+      HashMap map = new HashMap();
+      map.put("success", false);
+      map.put("msg", "设备自带打印设备，无需连接");
+      result.success(map);
+    }else if ("LANDI".equals(android.os.Build.MANUFACTURER)) {
+      HashMap map = new HashMap();
+      map.put("success", false);
+      map.put("msg", "设备自带打印设备，无需连接");
+      result.success(map);
+    } else {
+      ZKC zkc = (ZKC)wpPrinter;
+      zkc.isConnected(new ZKCConnectionInterface() {
+        @Override
+        public void onConnect(boolean success, String msg) {
+          if (success) {
+            HashMap map = new HashMap();
+            map.put("success", true);
+            map.put("msg", "连接成功");
+            result.success(map);
+          }else
+          {
+            HashMap map = new HashMap();
+            map.put("success", false);
+            map.put("msg", "蓝牙打印机未连接...");
+            result.success(map);
+          }
+        }
+      });
+    }
+  }
+
+  /*
+  * 连接蓝牙打印机
+  * */
+  private void connectToBLEPrinter(final Result result) {
+
+    if ("UBX".equals(android.os.Build.MANUFACTURER)) {
+      HashMap map = new HashMap();
+      map.put("success", false);
+      map.put("msg", "设备自带打印设备，无需连接");
+      result.success(map);
+    }else if ("LANDI".equals(android.os.Build.MANUFACTURER)) {
+      HashMap map = new HashMap();
+      map.put("success", false);
+      map.put("msg", "设备自带打印设备，无需连接");
+      result.success(map);
+    } else {
+      ZKC zkc = (ZKC)wpPrinter;
+      zkc.connect(new ZKCConnectionInterface() {
+        @Override
+        public void onConnect(boolean success, String msg) {
+          if (success) {
+            HashMap map = new HashMap();
+            map.put("success", true);
+            map.put("msg", "连接成功");
+            result.success(map);
+          }else
+          {
+            HashMap map = new HashMap();
+            map.put("success", false);
+            map.put("msg", "连接失败，请打开手机蓝牙，配对蓝牙设备...");
+            result.success(map);
+          }
+        }
+      });
+    }
 
   }
 }
