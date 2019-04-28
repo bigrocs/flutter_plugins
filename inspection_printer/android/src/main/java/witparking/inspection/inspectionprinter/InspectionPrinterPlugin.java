@@ -115,12 +115,14 @@ public class InspectionPrinterPlugin implements MethodCallHandler {
                 if (value.indexOf("pictureStream") == 0) {
                   String base64Image = value.split("pictureStream")[1];
                   try {
-                    Thread.sleep(600);
+                    Thread.sleep(1600);
                     zkc.printImage(base64Image, null);
                   } catch (InterruptedException e) {
                     e.printStackTrace();
                   }
-                }else {
+                }else if (value.equals("splitline")) {
+                  zkc.printText("--------------------------------", null);
+                } else {
                   value += '\n';
                   zkc.printText(value, new ZKCPrintInterface() {
                     @Override
@@ -130,8 +132,8 @@ public class InspectionPrinterPlugin implements MethodCallHandler {
                   });
                 }
               }
-
-              zkc.printText("\n\n\n\n", null);
+              // 出纸
+              zkc.printText("\n\n\n", null);
             }
           }
         });

@@ -92,14 +92,12 @@ public class ZKC extends WPPrinter {
     /*
     * 检测打印机连接状态
     * */
-    public boolean isConnected(ZKCConnectionInterface zkcConnectionInterface) {
+    public void isConnected(ZKCConnectionInterface zkcConnectionInterface) {
         if (printService.isConnected()) {
             printService.write(PrintCommand.set_Buzzer(2, 1));
             zkcConnectionInterface.onConnect(true, "");
-            return true;
         }
         zkcConnectionInterface.onConnect(false, "未连接");
-        return false;
     }
 
     /*

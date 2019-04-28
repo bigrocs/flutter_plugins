@@ -4,20 +4,8 @@
     <list default="true" id="273773e5-5db5-4741-bc0c-24b4aca38e08" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/CreateErWei.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/CreateErWei.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/InspectionPrinterPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/InspectionPrinterPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/LIANDI/LIANDI.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/LIANDI/LIANDI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/LIANDI/LIANDIPrintInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/LIANDI/LIANDIPrintInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/UBOXUN/UBOXUN.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/UBOXUN/UBOXUN.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/UBOXUN/UBOXUNPrintInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/UBOXUN/UBOXUNPrintInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/WPPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/WPPrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/ZKC/CMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/ZKC/CMD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/ZKC/PrintCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/ZKC/PrintCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/ZKC/ZKC.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/ZKC/ZKC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/ZKC/ZKCConnectionInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/ZKC/ZKCConnectionInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/ZKC/ZKCPrintInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/witparking/inspection/inspectionprinter/ZKC/ZKCPrintInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/inspection_printer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/inspection_printer.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -45,13 +33,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="gradle" value="1" />
+          <entry key="gradle" value="2" />
           <entry key="yaml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Groovy" value="1" />
+          <entry key="Groovy" value="2" />
           <entry key="YAML" value="1" />
         </counts>
       </usages-collector>
@@ -59,14 +47,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/inspection_printer.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="24" column="6" lean-forward="true" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+            <state relative-caret-position="360">
+              <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/android/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="74">
+              <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -93,8 +90,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/android/build.gradle" />
         <option value="$PROJECT_DIR$/lib/inspection_printer.dart" />
+        <option value="$PROJECT_DIR$/android/build.gradle" />
       </list>
     </option>
   </component>
@@ -226,20 +223,20 @@
     <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/inspection_printer.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="24" column="6" lean-forward="true" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+        <state relative-caret-position="360">
+          <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
         </state>
       </provider>
     </entry>
