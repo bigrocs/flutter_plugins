@@ -163,7 +163,9 @@ public class InspectionPrinterPlugin implements MethodCallHandler {
         } catch (Exception e) {
           e.printStackTrace();
         }
-      }else {
+      }else if (value.equals("splitline")) {
+        uboxun.printText("--------------------------------------------", null);
+      } else {
         if (value.isEmpty()) value = "\n";
         uboxun.printText(value, new UBOXUNPrintInterface() {
           @Override
