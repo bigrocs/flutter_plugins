@@ -1,4 +1,4 @@
-package android.src.main.java.witparking.inspection.inspectionprinter.ZKC;
+package witparking.inspection.inspectionprinter.ZKC;
 
 /*
 * 深圳市智谷联软件技术有限公司

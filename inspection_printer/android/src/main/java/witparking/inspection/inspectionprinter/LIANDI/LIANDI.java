@@ -1,4 +1,4 @@
-package android.src.main.java.witparking.inspection.inspectionprinter.LIANDI;
+package witparking.inspection.inspectionprinter.LIANDI;
 
 import android.app.Activity;
 import android.graphics.Bitmap;

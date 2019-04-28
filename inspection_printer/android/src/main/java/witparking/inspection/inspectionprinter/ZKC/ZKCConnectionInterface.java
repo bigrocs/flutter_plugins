@@ -1,4 +1,4 @@
-package android.src.main.java.witparking.inspection.inspectionprinter.ZKC;
+package witparking.inspection.inspectionprinter.ZKC;
 
 public interface ZKCConnectionInterface {
 

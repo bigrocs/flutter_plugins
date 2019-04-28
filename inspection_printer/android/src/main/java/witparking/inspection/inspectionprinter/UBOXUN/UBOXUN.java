@@ -1,4 +1,4 @@
-package android.src.main.java.witparking.inspection.inspectionprinter.UBOXUN;
+package witparking.inspection.inspectionprinter.UBOXUN;
 
 import android.app.Activity;
 import android.device.PrinterManager;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import witparking.inspection.inspectionprinter.CreateErWei;
 import witparking.inspection.inspectionprinter.WPPrinter;
+
 
 public class UBOXUN extends WPPrinter {
 

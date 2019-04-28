@@ -1,4 +1,4 @@
-package android.src.main.java.witparking.inspection.inspectionprinter;
+package witparking.inspection.inspectionprinter;
 
 public class WPPrinter {
 }
