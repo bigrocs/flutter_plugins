@@ -41,4 +41,5 @@ dependencies {
     implementation files('libs/encryption3des.jar')
     implementation 'com.sonli:spush-codec-pole:1.0.0'
     implementation files('libs/fastjson-1.1.41.jar')
+    implementation 'com.yanzhenjie:permission:1.0.6'
 }

@@ -1,5 +1,6 @@
 package witparking.inspection.inspectionmqtt;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.util.Log;
@@ -19,6 +21,8 @@ import com.sonli.spush.codec.pole.ICodec;
 import com.sonli.spush.codec.pole.PoleCodec;
 import com.sonli.spush.codec.pole.Rule;
 import com.witparking.encryption3des.utils3des;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionListener;
 import com.ypy.eventbus.EventBus;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -119,7 +123,7 @@ public class MqttManager {
                     Log.e("console", "开始连接推送");
                     connect();
                 } else {
-                    Log.e("console", "推送连接中");
+                    //Log.e("console", "推送连接中");
                 }
 
             }
@@ -286,78 +290,92 @@ public class MqttManager {
                 e.printStackTrace();
             }
         }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
 
-                HttpURLConnection connection = null;
-                try {
+        AndPermission
+                .with(mContext)
+                .requestCode(100)
+                .permission(Manifest.permission.READ_PHONE_STATE)
+                .callback(new PermissionListener() {
+                    @Override
+                    public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
 
-                    StringBuffer urls = new StringBuffer();
+                                HttpURLConnection connection = null;
+                                try {
 
-                    urls.append(serviceUrl + "&mac="+getCCID(mContext)+"&clientType=0");
+                                    StringBuffer urls = new StringBuffer();
 
-                    URL url = new URL(urls.toString());
-                    Log.e("console", "url:" + url.toString());
-                    connection = (HttpURLConnection) url.openConnection();
-                    // 设置请求方法，默认是GET
-                    connection.setRequestMethod("POST");
-                    // 设置字符集
-                    connection.setRequestProperty("Charset", "UTF-8");
-                    // 设置文件类型
-                    connection.setRequestProperty("Content-Type", "text/xml; charset=UTF-8");
-                    // 设置请求参数，可通过Servlet的getHeader()获取
-                    connection.setRequestProperty("Cookie", "AppName=" + URLEncoder.encode("你好", "UTF-8"));
-                    // 设置自定义参数
-                    connection.setRequestProperty("MyProperty", "this is me!");
-                    if (connection.getResponseCode() == 200) {
-                        Log.e("console", "connection.getResponseCode() == 200");
-                        InputStream is = connection.getInputStream();
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                        StringBuilder sb = new StringBuilder();
-                        String line = null;
-                        while ((line = reader.readLine()) != null) {
-                            sb.append(line);
-                        }
-                        Log.e("console", sb.toString());
-                        is.close();
-                        try {
+                                    urls.append(serviceUrl + "&mac="+getCCID(mContext)+"&clientType=0");
 
-                            String message = sb.toString();
+                                    URL url = new URL(urls.toString());
+                                    Log.e("console", "url:" + url.toString());
+                                    connection = (HttpURLConnection) url.openConnection();
+                                    // 设置请求方法，默认是GET
+                                    connection.setRequestMethod("POST");
+                                    // 设置字符集
+                                    connection.setRequestProperty("Charset", "UTF-8");
+                                    // 设置文件类型
+                                    connection.setRequestProperty("Content-Type", "text/xml; charset=UTF-8");
+                                    // 设置请求参数，可通过Servlet的getHeader()获取
+                                    connection.setRequestProperty("Cookie", "AppName=" + URLEncoder.encode("你好", "UTF-8"));
+                                    // 设置自定义参数
+                                    connection.setRequestProperty("MyProperty", "this is me!");
+                                    if (connection.getResponseCode() == 200) {
+                                        Log.e("console", "connection.getResponseCode() == 200");
+                                        InputStream is = connection.getInputStream();
+                                        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                                        StringBuilder sb = new StringBuilder();
+                                        String line = null;
+                                        while ((line = reader.readLine()) != null) {
+                                            sb.append(line);
+                                        }
+                                        Log.e("console", sb.toString());
+                                        is.close();
+                                        try {
 
-                            JSONObject jsonObject = new JSONObject(message);
-                            JSONObject reuturnObject = jsonObject.optJSONObject("returnObject");
-                            if (jsonObject.optInt("code") == 30 && reuturnObject != null) {
-                                String id = reuturnObject.optString("id");
-                                String name = reuturnObject.optString("mId");
-                                MqttManager.ClientId = id;
-                                MqttManager.mId = name;
-                                synchronized (listClientIdCallback) {
-                                    for (ClientIdCallback callback : listClientIdCallback) {
-                                        callback.callBack(id, name);
+                                            String message = sb.toString();
+
+                                            JSONObject jsonObject = new JSONObject(message);
+                                            JSONObject reuturnObject = jsonObject.optJSONObject("returnObject");
+                                            if (jsonObject.optInt("code") == 30 && reuturnObject != null) {
+                                                String id = reuturnObject.optString("id");
+                                                String name = reuturnObject.optString("mId");
+                                                MqttManager.ClientId = id;
+                                                MqttManager.mId = name;
+                                                synchronized (listClientIdCallback) {
+                                                    for (ClientIdCallback callback : listClientIdCallback) {
+                                                        callback.callBack(id, name);
+                                                    }
+                                                    listClientIdCallback.clear();
+                                                }
+                                                MqttManager.SaveClientIdToCooke(mContext, reuturnObject.toString());
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                            Log.e("console", e.getMessage());
+                                        }
+                                    } else {
+                                        Log.e("console", connection.getResponseCode() + "");
                                     }
-                                    listClientIdCallback.clear();
-                                }
-                                MqttManager.SaveClientIdToCooke(mContext, reuturnObject.toString());
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            Log.e("console", e.getMessage());
-                        }
-                    } else {
-                        Log.e("console", connection.getResponseCode() + "");
-                    }
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } finally {
-                    if (connection != null) {
-                        connection.disconnect();
-                    }
+                                } catch (IOException e) {
+                                    // TODO Auto-generated catch block
+                                    e.printStackTrace();
+                                } finally {
+                                    if (connection != null) {
+                                        connection.disconnect();
+                                    }
 
-                }
-            }
-        }).start();
+                                }
+                            }
+                        }).start();
+                    }
+                    @Override
+                    public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
+
+                    }
+                }).start();
 
     }
 
