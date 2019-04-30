@@ -130,7 +130,7 @@ public class ZKC extends WPPrinter {
         byte[] bitmapArray;
         bitmapArray = Base64.decode(base64Image, Base64.DEFAULT);
         bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
-        printService.printGrayImage(bitmap);
+        printService.printRasterImage(bitmap);
     }
 
     /*

@@ -114,7 +114,7 @@ public class InspectionPrinterPlugin implements MethodCallHandler {
                 // base64图片
                 if (value.indexOf("pictureStream") == 0) {
                   try {
-                    Thread.sleep(2500);
+                    Thread.sleep(500);
                     String base64Image = value.split("pictureStream")[1];
                     zkc.printImage(base64Image, null);
                   } catch (Exception e) {
