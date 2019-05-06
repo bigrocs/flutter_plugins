@@ -112,6 +112,14 @@ public class ZKC extends WPPrinter {
     * 打印文本
     * */
     public void printText(String text, ZKCPrintInterface callback) {
+
+        if (text.indexOf("centered:") == 0) {
+            printService.write(PrintCommand.set_Align(1));
+            text = text.split("centered:")[1];
+            printService.printText(text);
+            return;
+        }
+        printService.write(PrintCommand.set_Align(0));
         printService.printText(text);
     }
 
@@ -126,6 +134,7 @@ public class ZKC extends WPPrinter {
     * 打印图片
     * */
     public void printImage(String base64Image, ZKCPrintInterface callback) {
+        printService.write(PrintCommand.set_Align(1));
         Bitmap bitmap = null;
         byte[] bitmapArray;
         bitmapArray = Base64.decode(base64Image, Base64.DEFAULT);

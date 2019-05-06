@@ -20,15 +20,15 @@ class InspectionMqtt {
   /*
   * 事件渠道用以接收消息
   * */
-  static StreamSubscription _subscription = null;
-  static subscribeMQTTMessage({Function callback}) {
+  static Stream _subscription = null;
+  static Stream subscribeMQTTMessage() {
     if (_subscription == null) {
-      _subscription = _stream.receiveBroadcastStream().listen(callback);
+      _subscription = _stream.receiveBroadcastStream();
     }
+    return _subscription;
   }
 
   static unsubscribeMQTTMessage() {
-    _subscription.cancel();
     _subscription = null;
   }
 }

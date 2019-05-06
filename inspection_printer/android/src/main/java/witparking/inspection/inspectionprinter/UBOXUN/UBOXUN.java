@@ -4,24 +4,31 @@ import android.app.Activity;
 import android.device.PrinterManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.util.Base64;
-import android.util.Log;
-import android.widget.Toast;
 
 import witparking.inspection.inspectionprinter.CreateErWei;
 import witparking.inspection.inspectionprinter.WPPrinter;
+
+import static witparking.inspection.inspectionprinter.UBOXUN.UBXPrinterManager.CONTENT_ALIGN_CENTER;
+import static witparking.inspection.inspectionprinter.UBOXUN.UBXPrinterManager.CONTENT_ALIGN_LEFT;
+import static witparking.inspection.inspectionprinter.UBOXUN.UBXPrinterManager.CONTENT_ALIGN_RIGHT;
 
 
 public class UBOXUN extends WPPrinter {
 
     Activity activity;
     private PrinterManager printerManager = new PrinterManager();
+    private UBXPrinterManager ubxPrinterManager = UBXPrinterManager.getInstance();
 
     public UBOXUN(Activity activity) {
         this.activity = activity;
         //打印机基本设定
         printerManager.prn_setSpeed(0);
         printerManager.setGrayLevel(4);
+        ubxPrinterManager.init(new Handler(
+
+        ), activity, 1);
     }
 
     /*
@@ -48,21 +55,15 @@ public class UBOXUN extends WPPrinter {
     public void printText(String text, UBOXUNPrintInterface callback) {
         if (!checkPrinterState(callback)) return;
         //状态正常开始打印
-        printerManager.setupPage(384, -1);
-        printerManager.drawTextEx(text, 5, 0, 384, -1, "arial", 26, 0, 0, 0);
-        printerManager.printPage(0);
-    }
-
-    /*
-     * 打印二维码
-     * @param content 内容
-     * */
-    void printQRCode(String content, UBOXUNPrintInterface callback) {
-        if (!checkPrinterState(callback)) return;
-        printerManager.setupPage(384, -1);
-        Bitmap _img = new CreateErWei().createQRImage(content);
-        printerManager.drawBitmap(_img, 10, 0);
-        printerManager.printPage(0);
+        //printerManager.setupPage(384, -1);
+        if (text.indexOf("centered:") == 0) {
+            text = text.split("centered:")[1];
+            ubxPrinterManager.appendText(text, 1, CONTENT_ALIGN_CENTER);
+            ubxPrinterManager.prtLayout();
+            return;
+        }
+        ubxPrinterManager.appendText(text, 1, CONTENT_ALIGN_LEFT);
+        ubxPrinterManager.prtLayout();
     }
 
     /*
@@ -75,21 +76,11 @@ public class UBOXUN extends WPPrinter {
             byte[] bitmapArray;
             bitmapArray = Base64.decode(base64Image, Base64.DEFAULT);
             bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
-            printerManager.setupPage(384, -1);
-            printerManager.drawBitmap(bitmap, 10, 0);
-            printerManager.printPage(0);
+            ubxPrinterManager.appendBitmap(bitmap, CONTENT_ALIGN_CENTER);
+            ubxPrinterManager.prtLayout();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /*
-     * 打印空行
-     * */
-    void printBlankLine(UBOXUNPrintInterface callback) {
-        if (!checkPrinterState(callback)) return;
-        printerManager.setupPage(384, -1);
-        printerManager.printPage(0);
-        printerManager.printPage(0);
-    }
 }
