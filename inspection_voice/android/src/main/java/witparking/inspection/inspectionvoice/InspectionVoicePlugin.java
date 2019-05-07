@@ -15,10 +15,12 @@ public class InspectionVoicePlugin implements MethodCallHandler {
 
     private static Registrar registrar;
     private Speech speech;
-    Result result;
+    private Result result;
+    private TTSUtil ttsUtil;
 
     private InspectionVoicePlugin() {
         speech = new Speech(InspectionVoicePlugin.registrar.activity());
+        ttsUtil = new TTSUtil(InspectionVoicePlugin.registrar.activity());
         EventBus.getDefault().register(this);
     }
 
@@ -53,7 +55,9 @@ public class InspectionVoicePlugin implements MethodCallHandler {
     * 语音播报
     * */
     private void speechSynthesis(MethodCall call) {
-        TTSUtil ttsUtil = new TTSUtil(InspectionVoicePlugin.registrar.activity());
+        if (ttsUtil == null) {
+            ttsUtil = new TTSUtil(InspectionVoicePlugin.registrar.activity());
+        }
         ttsUtil.add((String) call.argument("words"));
     }
 
