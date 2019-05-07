@@ -43,7 +43,7 @@ public class ViewfinderView extends View {
 		}
 
 		if(minLength<1080||minLength>1620){
-			length = minLength/4;
+			length = minLength / 2 - 4;
 		}else{
 			length = minLength / 2 - 4;
 		}

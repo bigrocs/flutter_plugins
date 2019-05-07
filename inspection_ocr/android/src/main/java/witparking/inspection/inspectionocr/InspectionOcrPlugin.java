@@ -1,10 +1,14 @@
 package witparking.inspection.inspectionocr;
 
+import android.Manifest;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.util.Base64;
 import android.util.Log;
 
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionListener;
 import com.ypy.eventbus.EventBus;
 
 import org.json.JSONObject;
@@ -14,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.BitSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.flutter.plugin.common.MethodCall;
@@ -49,11 +54,24 @@ public class InspectionOcrPlugin implements MethodCallHandler {
     }
 
     @Override
-    public void onMethodCall(MethodCall call, Result result) {
+    public void onMethodCall(MethodCall call, final Result result) {
         switch (call.method) {
             case "recognitionTheplate":
-                recognitionResult = result;
-                spiteUtil.spite(true);
+                AndPermission
+                        .with(InspectionOcrPlugin.registrar.activity())
+                        .requestCode(100)
+                        .permission(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .callback(new PermissionListener() {
+                            @Override
+                            public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
+                                recognitionResult = result;
+                                spiteUtil.spite(true);
+                            }
+                            @Override
+                            public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
+
+                            }
+                        }).start();
                 break;
             default:
                 result.notImplemented();

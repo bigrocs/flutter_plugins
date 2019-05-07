@@ -37,4 +37,5 @@ android {
 dependencies {
     compileOnly files('libs/EventBus-2.4.jar')
     implementation files('libs/iceplate.jar')
+    compileOnly 'com.yanzhenjie:permission:1.0.6'
 }

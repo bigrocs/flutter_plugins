@@ -1,6 +1,11 @@
 package witparking.inspection.inspectionupdate;
 
 
+import android.Manifest;
+import android.support.annotation.NonNull;
+
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionListener;
 import com.ypy.eventbus.EventBus;
 
 import org.json.JSONException;
@@ -8,6 +13,7 @@ import org.json.JSONObject;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.flutter.plugin.common.EventChannel;
@@ -59,11 +65,23 @@ public class InspectionUpdatePlugin implements MethodCallHandler {
     * */
     if (call.method.equals("update")) {
       updateResult = result;
-      String url = call.argument("url");
-      AppUpdateUtils appUpdateUtils = new AppUpdateUtils(InspectionUpdatePlugin.registrar.activity());
-      String fileName = "巡检端.apk";
-      appUpdateUtils.downloadAppWithUrl(url, fileName);
+      final String url = call.argument("url");
+      final AppUpdateUtils appUpdateUtils = new AppUpdateUtils(InspectionUpdatePlugin.registrar.activity());
+      final String fileName = "巡检端.apk";
+      AndPermission
+              .with(InspectionUpdatePlugin.registrar.activity())
+              .requestCode(100)
+              .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+              .callback(new PermissionListener() {
+                @Override
+                public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
+                  appUpdateUtils.downloadAppWithUrl(url, fileName);
+                }
+                @Override
+                public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
 
+                }
+              }).start();
     } else {
       result.notImplemented();
     }
