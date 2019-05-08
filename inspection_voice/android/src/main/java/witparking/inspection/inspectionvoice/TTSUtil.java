@@ -23,17 +23,13 @@ import static com.baidu.tts.client.SpeechSynthesizer.MIX_MODE_HIGH_SPEED_SYNTHES
 
 public class TTSUtil {
 
-    private static final String TAG = "TTS_UTIL";
-
-    private boolean playTAG = false;
     // 语音合成客户端
     private SpeechSynthesizer mSpeechSynthesizer;
     private Activity activity;
     private ArrayList<String> speech = new ArrayList<String>();
     private boolean speaking = false;
-    private Date date = new Date();
 
-    private String voiceType = new voices().m15;
+    private String voiceType = new voices().f7;
 
     public TTSUtil(Activity activity) {
         this.activity = activity;
@@ -65,7 +61,7 @@ public class TTSUtil {
         //设置合成方案 mix模式下，仅wifi使用在线合成,返回速度如果慢（超时，一般为1.2秒）直接切换离线，适用于仅WIFI网络环境较差的情况)
         mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_MIX_MODE, MIX_MODE_HIGH_SPEED_SYNTHESIZE_WIFI);
         //合成引擎速度优化等级，取值范围[0, 2]，值越大速度越快（离线引擎）
-        //mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_VOCODER_OPTIM_LEVEL, String.valueOf(2));
+        mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_VOCODER_OPTIM_LEVEL, String.valueOf(2));
 
         // 获取语音合成授权信息
         AuthInfo authInfo = mSpeechSynthesizer.auth(TtsMode.MIX);
@@ -84,7 +80,7 @@ public class TTSUtil {
         if (speech.size() > 5) {
             speech.remove(0);
         }
-        if (!speaking || new Date().getTime() - date.getTime() > 1000 * 20) {
+        if (!speaking) {
             Speak();
         }
     }
@@ -94,16 +90,16 @@ public class TTSUtil {
         String speakString;
         try {
             if (speech.size() > 0) {
-                date = new Date();
                 speakString = speech.get(0);
                 speaking = true;
                 mSpeechSynthesizer.speak(speakString);
-                speech.remove(0);
+                speech.remove(speakString);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             Log.e("console", "Speak: " + "语音播报错误");
+            speech.clear();
+            speaking = false;
         }
     }
 

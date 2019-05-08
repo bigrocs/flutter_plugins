@@ -96,6 +96,8 @@ public class InspectionMqttPlugin implements MethodCallHandler {
      * event_bus通知
      * */
     public void onEventMainThread(SendMessageEvent event) {
-        InspectionMqttPlugin.eventSink.success(event.message);
+        if (InspectionMqttPlugin.eventSink != null) {
+            InspectionMqttPlugin.eventSink.success(event.message);
+        }
     }
 }
