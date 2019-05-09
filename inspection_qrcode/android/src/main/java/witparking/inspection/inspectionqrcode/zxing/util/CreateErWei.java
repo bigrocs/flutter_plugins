@@ -7,6 +7,7 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -25,6 +26,11 @@ public class CreateErWei {
             Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
             hints.put(EncodeHintType.MARGIN, 5);
             hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+            /*
+             * 设置容错级别，默认为ErrorCorrectionLevel.L
+             * 因为中间加入logo所以建议你把容错级别调至H,否则可能会出现识别不了
+             */
+            hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
             //图像数据转换，使用了矩阵转换
             BitMatrix bitMatrix = new QRCodeWriter().encode(url, BarcodeFormat.QR_CODE, QR_WIDTH, QR_HEIGHT, hints);
 
@@ -80,5 +86,12 @@ public class CreateErWei {
             }
         }
         return resMatrix;
+    }
+
+    /*
+    * 创建带图片的二维码
+    * */
+    public Bitmap createQRImageWithLogo(String url, Bitmap logo) {
+        return null;
     }
 }
