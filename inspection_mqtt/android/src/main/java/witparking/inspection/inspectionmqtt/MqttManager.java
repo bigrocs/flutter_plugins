@@ -123,7 +123,7 @@ public class MqttManager {
                     Log.e("console", "开始连接推送");
                     connect();
                 } else {
-                    //Log.e("console", "推送连接中");
+                    Log.e("console", "推送连接中");
                 }
 
             }
@@ -261,14 +261,6 @@ public class MqttManager {
 
     public static void getClientId(final Context mContext, final ClientIdCallback clientIdCallback, final String serviceUrl) {
 
-        synchronized (listClientIdCallback) {
-            if (listClientIdCallback.size() > 0) {
-                listClientIdCallback.add(clientIdCallback);
-                return;
-            }
-            listClientIdCallback.add(clientIdCallback);
-        }
-
         String result = MqttManager.getClientIdByCooke(mContext);
 
         if (result != null) {
@@ -278,13 +270,7 @@ public class MqttManager {
                 String name = json.optString("mId");
                 MqttManager.ClientId = id;
                 MqttManager.mId = name;
-                synchronized (listClientIdCallback) {
-                    for (ClientIdCallback callback : listClientIdCallback) {
-                        callback.callBack(id, name);
-                    }
-                    listClientIdCallback.clear();
-                }
-
+                clientIdCallback.callBack(id, name);
                 return;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -344,12 +330,7 @@ public class MqttManager {
                                                 String name = reuturnObject.optString("mId");
                                                 MqttManager.ClientId = id;
                                                 MqttManager.mId = name;
-                                                synchronized (listClientIdCallback) {
-                                                    for (ClientIdCallback callback : listClientIdCallback) {
-                                                        callback.callBack(id, name);
-                                                    }
-                                                    listClientIdCallback.clear();
-                                                }
+                                                clientIdCallback.callBack(id, name);
                                                 MqttManager.SaveClientIdToCooke(mContext, reuturnObject.toString());
                                             }
                                         } catch (Exception e) {

@@ -33,6 +33,7 @@ public class TTSUtil {
 
     public TTSUtil(Activity activity) {
         this.activity = activity;
+        speaking = false;
         initTTS();
     }
 
@@ -88,12 +89,15 @@ public class TTSUtil {
     public void Speak() {
 
         String speakString;
+
         try {
             if (speech.size() > 0) {
                 speakString = speech.get(0);
-                speaking = true;
-                mSpeechSynthesizer.speak(speakString);
-                speech.remove(speakString);
+                if (speakString != null) {
+                    speaking = true;
+                    mSpeechSynthesizer.speak(speakString);
+                    speech.remove(speakString);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

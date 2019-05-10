@@ -58,7 +58,10 @@ public class InspectionVoicePlugin implements MethodCallHandler {
         if (ttsUtil == null) {
             ttsUtil = new TTSUtil(InspectionVoicePlugin.registrar.activity());
         }
-        ttsUtil.add((String) call.argument("words"));
+        String content = (String) call.argument("words");
+        if (content != null) {
+            ttsUtil.add(content);
+        }
     }
 
     public void onEvent(VoiceInputEvent event) {
