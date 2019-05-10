@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
@@ -114,6 +115,8 @@ public final class CaptureActivity extends Activity implements
 
         open = false;
 
+        final TextView textView = (TextView) findViewById(R.id._open_flashlight_text_);
+        textView.setText("打开手电筒");
         ImageButton open_flashlight_btn = (ImageButton) findViewById(R.id._open_flashlight_btn_);
         open_flashlight_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,10 +125,12 @@ public final class CaptureActivity extends Activity implements
                 if (!open) {
                     open = true;
                     btn.setBackground(getResources().getDrawable(R.drawable.scan_icon_flashlight_open3x));
+                    textView.setText("关闭手电筒");
                 }else
                 {
                     open = false;
                     btn.setBackground(getResources().getDrawable(R.drawable.scan_icon_flashlight_close3x));
+                    textView.setText("打开手电筒");
                 }
                 cameraManager.setFlashModeTorch(open);
             }
