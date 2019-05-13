@@ -31,10 +31,26 @@ public class TTSUtil {
 
     private String voiceType = new voices().f7;
 
-    public TTSUtil(Activity activity) {
+    private TTSUtil(Activity activity) {
         this.activity = activity;
         speaking = false;
         initTTS();
+    }
+
+    /*
+    * 单例
+    * */
+    private static TTSUtil mSingleton = null;
+
+    public static TTSUtil getInstance(Activity activity) {
+        if (mSingleton == null) {
+            synchronized (TTSUtil.class) {
+                if (mSingleton == null) {
+                    mSingleton = new TTSUtil(activity);
+                }
+            }
+        }
+        return mSingleton;
     }
 
     /*语音合成*/
