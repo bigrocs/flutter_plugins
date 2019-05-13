@@ -42,4 +42,5 @@ dependencies {
     implementation files('libs/BaiduLBS_Android.jar')
     implementation files('libs/component_common_sdk_1.0.0.jar')
     implementation files('libs/IndoorscapeAlbumPlugin.jar')
+    compileOnly 'com.yanzhenjie:permission:1.0.6'
 }

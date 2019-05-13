@@ -1,11 +1,16 @@
 package witparking.inspection.inspectionmap;
 
 
+import android.Manifest;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.baidu.mapapi.map.MapView;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionListener;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.flutter.plugin.common.EventChannel;
@@ -138,14 +143,28 @@ public class InspectionMapPlugin implements MethodCallHandler {
     * */
     private void getUserLocation(final Result result) {
 
-        LBSLocation lbsLocation = new LBSLocation(registrar.activity());
-        lbsLocation.onceGet = true;
-        lbsLocation.start(new LocationInterface() {
-            @Override
-            public void onLocationUpdate(HashMap res) {
-                result.success(res);
-            }
-        });
+        AndPermission
+                .with(InspectionMapPlugin.registrar.activity())
+                .requestCode(100)
+                .permission(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
+                .callback(new PermissionListener() {
+                    @Override
+                    public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
+                        LBSLocation lbsLocation = new LBSLocation(registrar.activity());
+                        lbsLocation.onceGet = true;
+                        lbsLocation.start(new LocationInterface() {
+                            @Override
+                            public void onLocationUpdate(HashMap res) {
+                                result.success(res);
+                            }
+                        });
+                    }
+                    @Override
+                    public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
+
+                    }
+                }).start();
+
     }
 
 }
