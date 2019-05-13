@@ -105,6 +105,19 @@ public class MqttManager {
 
 
     public void startReconnect(final String mqttService, final String userName, final String passWord) {
+
+        if (client != null && client.isConnected()) {
+            try {
+                for (String topic : myTopics) {
+                    client.unsubscribe(topic);
+                    client.disconnect();
+                    client = null;
+                }
+            } catch (MqttException e) {
+                e.printStackTrace();
+            }
+        }
+
         scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(new Runnable() {
 
@@ -117,7 +130,6 @@ public class MqttManager {
                 if (client == null) {
                     String url = mqttService;
                     init(url, userName, passWord, MqttManager.mId);
-
                 }
                 if (!client.isConnected()) {
                     Log.e("console", "开始连接推送");

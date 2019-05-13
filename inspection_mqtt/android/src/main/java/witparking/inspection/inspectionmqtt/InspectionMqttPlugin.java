@@ -100,4 +100,5 @@ public class InspectionMqttPlugin implements MethodCallHandler {
             InspectionMqttPlugin.eventSink.success(event.message);
         }
     }
+
 }
