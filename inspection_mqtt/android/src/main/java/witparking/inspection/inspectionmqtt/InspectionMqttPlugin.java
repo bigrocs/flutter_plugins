@@ -1,19 +1,15 @@
 package witparking.inspection.inspectionmqtt;
 
-import com.ypy.eventbus.EventBus;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
+import android.util.Log;
 
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
+import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
+import io.flutter.view.FlutterNativeView;
 
 /**
  * InspectionMqttPlugin
@@ -26,9 +22,28 @@ public class InspectionMqttPlugin implements MethodCallHandler {
     private MqttManager mqttManager;
 
     private InspectionMqttPlugin() {
-        mqttManager = new MqttManager(InspectionMqttPlugin.registrar.activity(), "DD8F9EFA1BAC44D9B3B583BC00BE805D");
-        EventBus eventBus = EventBus.getDefault();
-        eventBus.register(this);
+
+        mqttManager = new MqttManager(InspectionMqttPlugin.registrar.activity(), "DD8F9EFA1BAC44D9B3B583BC00BE805D", new MqttManager.ReceiveMessageInterface() {
+            @Override
+            public void onMessage(SendMessageEvent event) {
+                Log.e("MQTT", "eventBus ---- ");
+                if (InspectionMqttPlugin.eventSink != null) {
+                    InspectionMqttPlugin.eventSink.success(event.message);
+                }
+            }
+        });
+
+        InspectionMqttPlugin.registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
+            @Override
+            public boolean onViewDestroy(FlutterNativeView flutterNativeView) {
+
+                if (mqttManager != null) {
+                    mqttManager.onDestroy();
+                }
+
+                return false;
+            }
+        });
     }
 
     /**
@@ -96,9 +111,7 @@ public class InspectionMqttPlugin implements MethodCallHandler {
      * event_bus通知
      * */
     public void onEventMainThread(SendMessageEvent event) {
-        if (InspectionMqttPlugin.eventSink != null) {
-            InspectionMqttPlugin.eventSink.success(event.message);
-        }
+
     }
 
 }

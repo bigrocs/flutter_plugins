@@ -76,8 +76,11 @@ public class MqttManager {
 
     public static String clientIdSavePath;
 
+    public ReceiveMessageInterface receiveMessageInterface;
+
     @SuppressLint("HandlerLeak")
-    public MqttManager(Context mContext, String appId) {
+    public MqttManager(Context mContext, String appId, ReceiveMessageInterface receiveMessageInterface) {
+        this.receiveMessageInterface = receiveMessageInterface;
         MqttManager.appId = appId;
         this.mContext = mContext;
         handler = new Handler() {
@@ -196,7 +199,6 @@ public class MqttManager {
                             codec = new PoleCodec(rule);
                         }
 
-
                         Log.e("console", "message=" + printHexBinary(message.getPayload()));
 
                         String byteString = Base64.encodeToString(message.getPayload(), 2);
@@ -205,13 +207,12 @@ public class MqttManager {
                         byte[] decStr = mUtils3des.decToByte(byteString);
                         Log.e("console", "decStr=" + printHexBinary(decStr));
 
-
                         String[] decode1 = codec.decode(decStr);
 
-                        for (int i = 0; i < decode1.length; i++) {
-                            Log.e("console", decode1[i]);
+                        Log.e("MQTT消息", decode1[2]);
+                        if (receiveMessageInterface != null) {
+                            receiveMessageInterface.onMessage(new SendMessageEvent(decode1[2]));
                         }
-                        EventBus.getDefault().post(new SendMessageEvent(decode1[2]));
                     } catch (Exception e) {
                         Log.e("console", "解析异常");
                         e.printStackTrace();
@@ -464,5 +465,9 @@ public class MqttManager {
         }   // hex string to uppercase
         m_szUniqueID = m_szUniqueID.toUpperCase();
         return m_szUniqueID;
+    }
+
+    public interface ReceiveMessageInterface {
+        void onMessage(SendMessageEvent event);
     }
 }
