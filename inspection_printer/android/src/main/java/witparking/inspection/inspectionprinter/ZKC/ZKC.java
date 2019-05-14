@@ -34,13 +34,17 @@ public class ZKC extends WPPrinter {
 
         this._context = context;
 
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        pairedDevices = bluetoothAdapter.getBondedDevices();
+        try {
+            printService = new PrintService(context);
+            // 查询已配对的设备
+            bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            pairedDevices = bluetoothAdapter.getBondedDevices();
+            //设置字体
+            printService.write(PrintCommand.set_FontStyle(0, 0, 0, 0, 0));
+        } catch (Exception e) {
+            Log.e("", e.getMessage());
+        }
 
-        printService = new PrintService(context);
-
-        //设置字体
-        printService.write(PrintCommand.set_FontStyle(0, 0, 0, 0, 0));
     }
 
     public void connect(final ZKCConnectionInterface zkcConnectionInterface) {

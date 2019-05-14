@@ -85,7 +85,7 @@ public class InspectionPrinterPlugin implements MethodCallHandler {
       printForUBX(list);
     }else{
       //普通手机 选择蓝牙打印方式
-      printForZKC(list);
+      printForZKC(list, result);
     }
 
   }
@@ -95,7 +95,7 @@ public class InspectionPrinterPlugin implements MethodCallHandler {
   * 蓝牙打印机
   * 打印
   * */
-  private void printForZKC(final ArrayList list) {
+  private void printForZKC(final ArrayList list, final Result result) {
 
     final ZKC zkc = (ZKC)wpPrinter;
 
@@ -139,6 +139,12 @@ public class InspectionPrinterPlugin implements MethodCallHandler {
               }
               // 出纸
               zkc.printText("\n\n\n", null);
+            } else
+            {
+              HashMap map = new HashMap();
+              map.put("success", false);
+              map.put("msg", msg);
+              result.success(map);
             }
           }
         });
@@ -231,7 +237,7 @@ public class InspectionPrinterPlugin implements MethodCallHandler {
           {
             HashMap map = new HashMap();
             map.put("success", false);
-            map.put("msg", "蓝牙打印机未连接...");
+            map.put("msg", msg);
             result.success(map);
           }
         }
@@ -268,7 +274,7 @@ public class InspectionPrinterPlugin implements MethodCallHandler {
           {
             HashMap map = new HashMap();
             map.put("success", false);
-            map.put("msg", "连接失败，请打开手机蓝牙，配对蓝牙设备...");
+            map.put("msg", msg);
             result.success(map);
           }
         }
