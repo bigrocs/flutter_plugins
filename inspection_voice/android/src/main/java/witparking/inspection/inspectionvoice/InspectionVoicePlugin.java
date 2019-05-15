@@ -1,6 +1,13 @@
 package witparking.inspection.inspectionvoice;
 
+import android.Manifest;
+import android.support.annotation.NonNull;
+
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionListener;
 import com.ypy.eventbus.EventBus;
+
+import java.util.List;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -40,7 +47,7 @@ public class InspectionVoicePlugin implements MethodCallHandler {
                 speechSynthesis(call);
                 break;
             case "startSpeechInput":
-                speech.startASR();
+                startSpeechInput();
                 break;
             case "stopSpeechInput":
                 this.result = result;
@@ -68,5 +75,25 @@ public class InspectionVoicePlugin implements MethodCallHandler {
         if (event.message != null) {
             result.success(event.message);
         }
+    }
+
+    /*
+    * 开始语音播报
+    * */
+    private void startSpeechInput() {
+        AndPermission
+                .with(InspectionVoicePlugin.registrar.activity())
+                .requestCode(100)
+                .permission(Manifest.permission.RECORD_AUDIO)
+                .callback(new PermissionListener() {
+                    @Override
+                    public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
+                        speech.startASR();
+                    }
+                    @Override
+                    public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
+
+                    }
+                }).start();
     }
 }

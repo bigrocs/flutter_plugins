@@ -39,4 +39,5 @@ dependencies {
     implementation files('libs/bdasr_V3_20180801_d6f298a.jar')
     compileOnly files('libs/EventBus-2.4.jar')
     implementation files('libs/pinyin4j-2.5.0.jar')
+    compileOnly 'com.yanzhenjie:permission:1.0.6'
 }
