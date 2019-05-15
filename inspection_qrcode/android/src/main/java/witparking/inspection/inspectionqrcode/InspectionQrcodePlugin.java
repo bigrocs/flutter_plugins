@@ -1,14 +1,19 @@
 package witparking.inspection.inspectionqrcode;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 import android.util.Base64;
 
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionListener;
 import com.ypy.eventbus.EventBus;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.flutter.plugin.common.MethodCall;
@@ -46,8 +51,21 @@ public class InspectionQrcodePlugin implements MethodCallHandler {
         switch (call.method) {
             case "startScan":
                 scanResult = result;
-                Intent intent = new Intent(InspectionQrcodePlugin.registrar.activity(), CaptureActivity.class);
-                InspectionQrcodePlugin.registrar.activity().startActivity(intent);
+                AndPermission
+                        .with(InspectionQrcodePlugin.registrar.activity())
+                        .requestCode(100)
+                        .permission(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .callback(new PermissionListener() {
+                            @Override
+                            public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
+                                Intent intent = new Intent(InspectionQrcodePlugin.registrar.activity(), CaptureActivity.class);
+                                InspectionQrcodePlugin.registrar.activity().startActivity(intent);
+                            }
+                            @Override
+                            public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
+
+                            }
+                        }).start();
                 break;
             case "createQRCode":
                 String base64Image = "";
