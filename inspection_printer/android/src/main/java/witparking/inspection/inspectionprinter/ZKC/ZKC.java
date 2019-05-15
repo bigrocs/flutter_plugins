@@ -36,11 +36,11 @@ public class ZKC extends WPPrinter {
 
         try {
             printService = new PrintService(context);
+            //设置字体
+            printService.write(PrintCommand.set_FontStyle(0, 0, 0, 0, 0));
             // 查询已配对的设备
             bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             pairedDevices = bluetoothAdapter.getBondedDevices();
-            //设置字体
-            printService.write(PrintCommand.set_FontStyle(0, 0, 0, 0, 0));
         } catch (Exception e) {
             Log.e("", e.getMessage());
         }
@@ -59,6 +59,13 @@ public class ZKC extends WPPrinter {
         // 手机上没有配对设备
         if (pairedDevices.size() <= 0) {
             zkcConnectionInterface.onConnect(false, "暂无配对设备，请打开手机设置，配对连接蓝牙设备");
+            try {
+                // 查询已配对的设备
+                bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                pairedDevices = bluetoothAdapter.getBondedDevices();
+            } catch (Exception e) {
+                Log.e("", e.getMessage());
+            }
             return;
         }
 
