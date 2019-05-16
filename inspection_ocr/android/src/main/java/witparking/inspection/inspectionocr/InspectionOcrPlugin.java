@@ -25,7 +25,9 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
+import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
+import io.flutter.view.FlutterNativeView;
 
 /**
  * InspectionOcrPlugin
@@ -40,6 +42,14 @@ public class InspectionOcrPlugin implements MethodCallHandler {
         EventBus.getDefault().register(this);
         spiteUtil = new SpiteUtil(InspectionOcrPlugin.registrar.activity());
         spiteUtil.init();
+
+        InspectionOcrPlugin.registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
+            @Override
+            public boolean onViewDestroy(FlutterNativeView flutterNativeView) {
+                if (spiteUtil != null) spiteUtil.onDestroy();
+                return false;
+            }
+        });
     }
 
     /**
