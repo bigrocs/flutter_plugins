@@ -78,8 +78,22 @@ public class MqttManager {
 
     public ReceiveMessageInterface receiveMessageInterface;
 
+    private static MqttManager mSingleton = null;
+
+    public static MqttManager getInstance(Context mContext, String appId, ReceiveMessageInterface receiveMessageInterface) {
+        if (mSingleton == null) {
+            synchronized (MqttManager.class) {
+                if (mSingleton == null) {
+                    mSingleton = new MqttManager(mContext, appId, receiveMessageInterface);
+                }
+            }
+        }
+        return mSingleton;
+
+    }
+
     @SuppressLint("HandlerLeak")
-    public MqttManager(Context mContext, String appId, ReceiveMessageInterface receiveMessageInterface) {
+    private MqttManager(Context mContext, String appId, ReceiveMessageInterface receiveMessageInterface) {
         this.receiveMessageInterface = receiveMessageInterface;
         MqttManager.appId = appId;
         this.mContext = mContext;

@@ -23,7 +23,7 @@ public class InspectionMqttPlugin implements MethodCallHandler {
 
     private InspectionMqttPlugin() {
 
-        mqttManager = new MqttManager(InspectionMqttPlugin.registrar.activity(), "DD8F9EFA1BAC44D9B3B583BC00BE805D", new MqttManager.ReceiveMessageInterface() {
+        mqttManager = MqttManager.getInstance(InspectionMqttPlugin.registrar.activity(), "DD8F9EFA1BAC44D9B3B583BC00BE805D", new MqttManager.ReceiveMessageInterface() {
             @Override
             public void onMessage(SendMessageEvent event) {
                 Log.e("MQTT", "eventBus ---- ");
