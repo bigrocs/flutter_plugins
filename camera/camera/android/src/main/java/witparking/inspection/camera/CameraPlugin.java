@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.print.PrintAttributes;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
 import android.util.Base64;
 import android.util.Log;
 
@@ -111,13 +112,16 @@ public class CameraPlugin implements MethodCallHandler {
         AndPermission
                 .with(CameraPlugin.registrar.activity())
                 .requestCode(100)
-                .permission(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .permission(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
                 .callback(new PermissionListener() {
                     @Override
                     public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         if (intent.resolveActivity(registrar.activity().getPackageManager()) != null) {//判断是否有相机应用
-                            photoUri = Uri.fromFile(getSavePhotoFile());
+                            photoUri = FileProvider.getUriForFile(
+                                    registrar.activity(),
+                                    registrar.activity().getPackageName() + ".provider",
+                                    getSavePhotoFile());
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                             registrar.activity().startActivityForResult(intent, REQ_CAMERA);
                         }
