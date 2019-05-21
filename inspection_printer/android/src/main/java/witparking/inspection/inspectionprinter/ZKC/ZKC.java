@@ -58,9 +58,14 @@ public class ZKC extends WPPrinter {
 
         // 手机上没有配对设备
         try {
-            if (pairedDevices.size() <= 0) {
-                zkcConnectionInterface.onConnect(false, "暂无配对设备，请打开手机设置，配对连接蓝牙设备");
+            if (pairedDevices == null) {
+                zkcConnectionInterface.onConnect(false, "请确认蓝牙是否开启");
                 // 查询已配对的设备
+                bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                pairedDevices = bluetoothAdapter.getBondedDevices();
+                return;
+            }else if (pairedDevices.size() <= 0) {
+                zkcConnectionInterface.onConnect(false, "暂无配对设备，请打开手机设置，配对连接蓝牙设备");
                 bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
                 pairedDevices = bluetoothAdapter.getBondedDevices();
                 return;
