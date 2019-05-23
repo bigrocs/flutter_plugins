@@ -107,7 +107,7 @@ public class InspectionOcrPlugin implements MethodCallHandler {
                 if (dir.exists()) {
                     Bitmap bitmap = BitmapFactory.decodeFile(event.path);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     try {
                         baos.flush();
                         baos.close();
