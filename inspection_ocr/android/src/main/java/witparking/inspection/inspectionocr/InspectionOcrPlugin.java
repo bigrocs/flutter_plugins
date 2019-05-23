@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionListener;
@@ -43,6 +44,8 @@ public class InspectionOcrPlugin implements MethodCallHandler {
         spiteUtil = new SpiteUtil(InspectionOcrPlugin.registrar.activity());
         spiteUtil.init();
 
+        Log.e("初始化测试", "初始化");
+
         InspectionOcrPlugin.registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
             @Override
             public boolean onViewDestroy(FlutterNativeView flutterNativeView) {
@@ -61,6 +64,8 @@ public class InspectionOcrPlugin implements MethodCallHandler {
 
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "inspection_ocr");
         channel.setMethodCallHandler(new InspectionOcrPlugin());
+
+        Log.e("初始化测试", "注册");
     }
 
     @Override
@@ -92,30 +97,36 @@ public class InspectionOcrPlugin implements MethodCallHandler {
     /*
     * 车牌识别结果
     * */
-    public void onEventMainThread(SpiteBackEvent event) {
+    public void onEventMainThread(final SpiteBackEvent event) {
 
-        String base64Image = "";
-        File dir = new File(event.path);
-        if (dir.exists()) {
-            Bitmap bitmap = BitmapFactory.decodeFile(event.path);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-            try {
-                baos.flush();
-                baos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String base64Image = "";
+                File dir = new File(event.path);
+                if (dir.exists()) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(event.path);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+                    try {
+                        baos.flush();
+                        baos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    byte[] bitmapBytes = baos.toByteArray();
+                    base64Image = Base64.encodeToString(bitmapBytes, Base64.NO_WRAP);
+                }
+
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("number", event.number);
+                map.put("color", event.color);
+                map.put("path", event.path);
+                map.put("base64Image", base64Image);
+                recognitionResult.success(map);
             }
+        }).start();
 
-            byte[] bitmapBytes = baos.toByteArray();
-            base64Image = Base64.encodeToString(bitmapBytes, Base64.NO_WRAP);
-        }
-
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("number", event.number);
-        map.put("color", event.color);
-        map.put("path", event.path);
-        map.put("base64Image", base64Image);
-        recognitionResult.success(map);
     }
 }

@@ -61,29 +61,33 @@ public class CameraPlugin implements MethodCallHandler {
             public boolean onActivityResult(int i, int i1, Intent intent) {
                 if (i == REQ_CAMERA && i1 == Activity.RESULT_OK) {
 
-                    ContentResolver contentResolver = registrar.activity().getContentResolver();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ContentResolver contentResolver = registrar.activity().getContentResolver();
 
-                    try {
-                        Bitmap bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(photoUri));
+                            try {
+                                Bitmap bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(photoUri));
 
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
-                        try {
-                            baos.flush();
-                            baos.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+                                try {
+                                    baos.flush();
+                                    baos.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                                byte[] bitmapBytes = baos.toByteArray();
+                                String base64Image = Base64.encodeToString(bitmapBytes, Base64.NO_WRAP);
+                                if (cameraResult != null) {
+                                    cameraResult.success(base64Image);
+                                }
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
                         }
-
-                        byte[] bitmapBytes = baos.toByteArray();
-                        String base64Image = Base64.encodeToString(bitmapBytes, Base64.NO_WRAP);
-                        if (cameraResult != null) {
-                            cameraResult.success(base64Image);
-                        }
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-
+                    }).start();
                 }
                 return false;
             }
