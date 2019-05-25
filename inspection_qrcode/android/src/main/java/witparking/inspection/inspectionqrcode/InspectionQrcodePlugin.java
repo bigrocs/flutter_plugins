@@ -20,7 +20,9 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
+import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
+import io.flutter.view.FlutterNativeView;
 import witparking.inspection.inspectionqrcode.zxing.android.CaptureActivity;
 import witparking.inspection.inspectionqrcode.zxing.util.CreateErWei;
 
@@ -33,7 +35,16 @@ public class InspectionQrcodePlugin implements MethodCallHandler {
     private Result scanResult;
 
     private InspectionQrcodePlugin() {
-        EventBus.getDefault().register(this);
+        
+        EventBus.getDefault().register(InspectionQrcodePlugin.this);
+
+        InspectionQrcodePlugin.registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
+            @Override
+            public boolean onViewDestroy(FlutterNativeView flutterNativeView) {
+                EventBus.getDefault().unregister(InspectionQrcodePlugin.this);
+                return false;
+            }
+        });
     }
     /**
      * Plugin registration.

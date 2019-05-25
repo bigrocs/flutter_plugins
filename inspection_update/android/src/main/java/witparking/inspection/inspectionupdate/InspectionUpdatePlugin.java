@@ -21,19 +21,31 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
+import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
+import io.flutter.view.FlutterNativeView;
 
 /** InspectionUpdatePlugin */
 public class InspectionUpdatePlugin implements MethodCallHandler {
 
-  static Registrar registrar;
+  private static Registrar registrar;
 
   private static EventChannel.EventSink eventSink;
   private Result updateResult;
 
 
-  InspectionUpdatePlugin() {
-    EventBus.getDefault().register(this);
+  private InspectionUpdatePlugin() {
+    
+    EventBus.getDefault().register(InspectionUpdatePlugin.this);
+    
+    InspectionUpdatePlugin.registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
+      @Override
+      public boolean onViewDestroy(FlutterNativeView flutterNativeView) {
+        EventBus.getDefault().unregister(InspectionUpdatePlugin.this);
+        return false;
+      }
+    });
+    
   }
 
   /** Plugin registration. */

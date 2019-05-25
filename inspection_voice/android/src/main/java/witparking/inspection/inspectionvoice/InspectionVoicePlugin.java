@@ -13,7 +13,9 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
+import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
+import io.flutter.view.FlutterNativeView;
 
 /**
  * InspectionVoicePlugin
@@ -26,9 +28,18 @@ public class InspectionVoicePlugin implements MethodCallHandler {
     private TTSUtil ttsUtil;
 
     private InspectionVoicePlugin() {
+        
         speech = new Speech(InspectionVoicePlugin.registrar.activity());
         //ttsUtil = TTSUtil.getInstance(InspectionVoicePlugin.registrar.activity());
-        EventBus.getDefault().register(this);
+        EventBus.getDefault().register(InspectionVoicePlugin.this);
+
+        InspectionVoicePlugin.registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
+            @Override
+            public boolean onViewDestroy(FlutterNativeView flutterNativeView) {
+                EventBus.getDefault().unregister(InspectionVoicePlugin.this);
+                return false;
+            }
+        });
     }
 
     /**
