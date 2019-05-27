@@ -131,6 +131,10 @@ public class InspectionOcrPlugin implements MethodCallHandler {
                     map.put("path", event.path);
                     map.put("base64Image", base64Image);
                     recognitionResult.success(map);
+                    /*
+                        内存回收
+                    */
+                    System.gc();
                 } catch (Exception e) {
                     Log.e("OCR 异常", e.getMessage());
                 }

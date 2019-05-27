@@ -82,6 +82,12 @@ public class CameraPlugin implements MethodCallHandler {
                                 String base64Image = Base64.encodeToString(bitmapBytes, Base64.NO_WRAP);
                                 if (cameraResult != null) {
                                     cameraResult.success(base64Image);
+                                    cameraResult = null;
+                                    /*
+                                    * 强制内存回收
+                                    * 防止OM
+                                    * */
+                                    System.gc();
                                 }
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
