@@ -27,7 +27,7 @@ import io.flutter.plugin.platform.PlatformView;
  */
 public class InspectionMapPlugin implements MethodCallHandler {
 
-    private static Registrar registrar;
+    private Registrar registrar;
     private static EventChannel.EventSink locEventSink;
     private static EventChannel.EventSink hawEventSink;
 
@@ -35,8 +35,8 @@ public class InspectionMapPlugin implements MethodCallHandler {
 
     private static BMapViewFactory bMapViewFactory;
 
-    private InspectionMapPlugin() {
-
+    private InspectionMapPlugin(Registrar registrar) {
+        this.registrar = registrar;
     };
 
     /**
@@ -44,10 +44,8 @@ public class InspectionMapPlugin implements MethodCallHandler {
      */
     public static void registerWith(final Registrar registrar) {
 
-        InspectionMapPlugin.registrar = registrar;
-
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "inspection_map");
-        channel.setMethodCallHandler(new InspectionMapPlugin());
+        channel.setMethodCallHandler(new InspectionMapPlugin(registrar));
 
         final EventChannel message_channel = new EventChannel(registrar.messenger(), "map.event.location");
         message_channel.setStreamHandler(new EventChannel.StreamHandler() {
@@ -125,7 +123,7 @@ public class InspectionMapPlugin implements MethodCallHandler {
             lbsTrace = null;
         }
         lbsTrace = new LBSTrace();
-        lbsTrace.init(InspectionMapPlugin.registrar.activity());
+        lbsTrace.init(registrar.activity());
         lbsTrace.start((String) call.argument("entity"), new TraceInterface() {
             @Override
             public void onRes(Map res) {
@@ -144,7 +142,7 @@ public class InspectionMapPlugin implements MethodCallHandler {
     private void getUserLocation(final Result result) {
 
         AndPermission
-                .with(InspectionMapPlugin.registrar.activity())
+                .with(registrar.activity())
                 .requestCode(100)
                 .permission(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
                 .callback(new PermissionListener() {

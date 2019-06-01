@@ -28,17 +28,19 @@ import io.flutter.view.FlutterNativeView;
 /** InspectionUpdatePlugin */
 public class InspectionUpdatePlugin implements MethodCallHandler {
 
-  private static Registrar registrar;
+  private Registrar registrar;
 
   private static EventChannel.EventSink eventSink;
   private Result updateResult;
 
 
-  private InspectionUpdatePlugin() {
+  private InspectionUpdatePlugin(Registrar registrar) {
+
+    this.registrar = registrar;
     
     EventBus.getDefault().register(InspectionUpdatePlugin.this);
     
-    InspectionUpdatePlugin.registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
+    registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
       @Override
       public boolean onViewDestroy(FlutterNativeView flutterNativeView) {
         EventBus.getDefault().unregister(InspectionUpdatePlugin.this);
@@ -51,10 +53,9 @@ public class InspectionUpdatePlugin implements MethodCallHandler {
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
 
-    InspectionUpdatePlugin.registrar = registrar;
 
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "inspection_update");
-    channel.setMethodCallHandler(new InspectionUpdatePlugin());
+    channel.setMethodCallHandler(new InspectionUpdatePlugin(registrar));
 
     final EventChannel message_channel = new EventChannel(registrar.messenger(), "update.event.progress");
     message_channel.setStreamHandler(new EventChannel.StreamHandler() {
@@ -78,10 +79,10 @@ public class InspectionUpdatePlugin implements MethodCallHandler {
     if (call.method.equals("update")) {
       updateResult = result;
       final String url = call.argument("url");
-      final AppUpdateUtils appUpdateUtils = new AppUpdateUtils(InspectionUpdatePlugin.registrar.activity());
+      final AppUpdateUtils appUpdateUtils = new AppUpdateUtils(registrar.activity());
       final String fileName = "巡检端.apk";
       AndPermission
-              .with(InspectionUpdatePlugin.registrar.activity())
+              .with(registrar.activity())
               .requestCode(100)
               .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
               .callback(new PermissionListener() {

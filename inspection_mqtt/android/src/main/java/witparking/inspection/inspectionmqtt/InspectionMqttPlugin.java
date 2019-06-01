@@ -16,24 +16,25 @@ import io.flutter.view.FlutterNativeView;
  */
 public class InspectionMqttPlugin implements MethodCallHandler {
 
-    private static Registrar registrar;
+    private Registrar registrar;
     private static EventChannel.EventSink eventSink;
 
     private MqttManager mqttManager;
 
-    private InspectionMqttPlugin() {
+    private InspectionMqttPlugin(Registrar registrar) {
 
-        mqttManager = MqttManager.getInstance(InspectionMqttPlugin.registrar.activity(), "DD8F9EFA1BAC44D9B3B583BC00BE805D", new MqttManager.ReceiveMessageInterface() {
+        this.registrar = registrar;
+
+        mqttManager = MqttManager.getInstance(registrar.activity(), "DD8F9EFA1BAC44D9B3B583BC00BE805D", new MqttManager.ReceiveMessageInterface() {
             @Override
             public void onMessage(SendMessageEvent event) {
-                Log.e("MQTT", "eventBus ---- ");
                 if (InspectionMqttPlugin.eventSink != null) {
                     InspectionMqttPlugin.eventSink.success(event.message);
                 }
             }
         });
 
-        InspectionMqttPlugin.registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
+        registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
             @Override
             public boolean onViewDestroy(FlutterNativeView flutterNativeView) {
 
@@ -51,10 +52,8 @@ public class InspectionMqttPlugin implements MethodCallHandler {
      */
     public static void registerWith(Registrar registrar) {
 
-        InspectionMqttPlugin.registrar = registrar;
-
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "inspection_mqtt");
-        channel.setMethodCallHandler(new InspectionMqttPlugin());
+        channel.setMethodCallHandler(new InspectionMqttPlugin(registrar));
 
         /*
         * 消息上报通道
@@ -91,7 +90,7 @@ public class InspectionMqttPlugin implements MethodCallHandler {
     private void getClientID(final MethodCall call, final Result result) {
 
         MqttManager.clientIdSavePath = call.argument("clientid_save_file_path");
-        MqttManager.getClientId(InspectionMqttPlugin.registrar.activity(), new MqttManager.ClientIdCallback() {
+        MqttManager.getClientId(registrar.activity(), new MqttManager.ClientIdCallback() {
             @Override
             public void callBack(String clentid, String name) {
                 if (clentid != null) {

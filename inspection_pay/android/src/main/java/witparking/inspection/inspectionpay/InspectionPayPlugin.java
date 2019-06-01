@@ -25,23 +25,21 @@ public class InspectionPayPlugin implements MethodCallHandler {
 
   private static final String WUWEIUNIONAPPID = "e7e157a1475e453ea82d17b4f9184551";
 
-  private static Registrar registrar;
+  private Registrar registrar;
 
   private Result unionPayResult;
 
-  private EventBus eventBus = EventBus.getDefault();
-
-  private InspectionPayPlugin() {
-    eventBus.register(this);
+  private InspectionPayPlugin(Registrar registrar) {
+    this.registrar = registrar;
+    EventBus.getDefault().register(this);
   };
 
   /**
    * Plugin registration.
    */
   public static void registerWith(Registrar registrar) {
-    InspectionPayPlugin.registrar = registrar;
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "inspection_pay");
-    channel.setMethodCallHandler(new InspectionPayPlugin());
+    channel.setMethodCallHandler(new InspectionPayPlugin(registrar));
   }
 
   @Override
@@ -77,10 +75,10 @@ public class InspectionPayPlugin implements MethodCallHandler {
 
     try {
       if (type == 0) {
-        AppHelper.callTrans(InspectionPayPlugin.registrar.activity(), "POS 通", "扫一扫", transData);
+        AppHelper.callTrans(registrar.activity(), "POS 通", "扫一扫", transData);
       }else
       {
-        AppHelper.callTrans(InspectionPayPlugin.registrar.activity(), "银行卡收款", "消费", transData);
+        AppHelper.callTrans(registrar.activity(), "银行卡收款", "消费", transData);
       }
     } catch (Exception e) {
       result.success("未安装银联客户端");

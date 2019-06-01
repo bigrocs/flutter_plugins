@@ -31,14 +31,16 @@ import witparking.inspection.inspectionqrcode.zxing.util.CreateErWei;
  */
 public class InspectionQrcodePlugin implements MethodCallHandler {
 
-    private static Registrar registrar;
+    private Registrar registrar;
     private Result scanResult;
 
-    private InspectionQrcodePlugin() {
+    private InspectionQrcodePlugin(Registrar registrar) {
+        
+        this.registrar = registrar;
         
         EventBus.getDefault().register(InspectionQrcodePlugin.this);
 
-        InspectionQrcodePlugin.registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
+        registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
             @Override
             public boolean onViewDestroy(FlutterNativeView flutterNativeView) {
                 EventBus.getDefault().unregister(InspectionQrcodePlugin.this);
@@ -50,11 +52,9 @@ public class InspectionQrcodePlugin implements MethodCallHandler {
      * Plugin registration.
      */
     public static void registerWith(Registrar registrar) {
-
-        InspectionQrcodePlugin.registrar = registrar;
-
+        
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "inspection_qrcode");
-        channel.setMethodCallHandler(new InspectionQrcodePlugin());
+        channel.setMethodCallHandler(new InspectionQrcodePlugin(registrar));
     }
 
     @Override
@@ -63,14 +63,14 @@ public class InspectionQrcodePlugin implements MethodCallHandler {
             case "startScan":
                 scanResult = result;
                 AndPermission
-                        .with(InspectionQrcodePlugin.registrar.activity())
+                        .with(registrar.activity())
                         .requestCode(100)
                         .permission(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .callback(new PermissionListener() {
                             @Override
                             public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
-                                Intent intent = new Intent(InspectionQrcodePlugin.registrar.activity(), CaptureActivity.class);
-                                InspectionQrcodePlugin.registrar.activity().startActivity(intent);
+                                Intent intent = new Intent(registrar.activity(), CaptureActivity.class);
+                                registrar.activity().startActivity(intent);
                             }
                             @Override
                             public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {

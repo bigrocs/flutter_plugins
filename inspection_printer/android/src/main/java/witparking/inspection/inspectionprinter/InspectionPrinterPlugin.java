@@ -26,17 +26,16 @@ import witparking.inspection.inspectionprinter.ZKC.ZKCPrintInterface;
 /** InspectionPrinterPlugin */
 public class InspectionPrinterPlugin implements MethodCallHandler {
 
-  private static Registrar registrar;
   private WPPrinter wpPrinter;
 
-  private InspectionPrinterPlugin() {
+  private InspectionPrinterPlugin(Registrar registrar) {
 
     if ("UBX".equals(android.os.Build.MANUFACTURER)) {
-      wpPrinter = new UBOXUN(InspectionPrinterPlugin.registrar.activity());
+      wpPrinter = new UBOXUN(registrar.activity());
     }else if ("LANDI".equals(android.os.Build.MANUFACTURER)) {
-      wpPrinter = new LIANDI(InspectionPrinterPlugin.registrar.activity());
+      wpPrinter = new LIANDI(registrar.activity());
     } else {
-      wpPrinter = new ZKC(InspectionPrinterPlugin.registrar.activity());
+      wpPrinter = new ZKC(registrar.activity());
     }
 
   }
@@ -44,10 +43,9 @@ public class InspectionPrinterPlugin implements MethodCallHandler {
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
 
-    InspectionPrinterPlugin.registrar = registrar;
-
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "inspection_printer");
-    channel.setMethodCallHandler(new InspectionPrinterPlugin());
+    channel.setMethodCallHandler(new InspectionPrinterPlugin(registrar));
+
   }
 
   @Override

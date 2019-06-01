@@ -38,27 +38,23 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
  */
 public class CameraPlugin implements MethodCallHandler {
 
-    private static Registrar registrar;
+    private Registrar registrar;
     private static int REQ_CAMERA = 85775482;
 
     private static Result cameraResult;
     private static Uri photoUri;
-    /**
-     * Plugin registration.
-     */
-    public static void registerWith(final Registrar registrar) {
 
-        CameraPlugin.registrar = registrar;
+    private CameraPlugin(final Registrar registrar) {
 
-        final MethodChannel channel = new MethodChannel(registrar.messenger(), "camera");
-        channel.setMethodCallHandler(new CameraPlugin());
+        this.registrar = registrar;
 
         /*
-        * 监听照相机返回的结果
-        * */
+         * 监听照相机返回的结果
+         * */
         registrar.addActivityResultListener(new PluginRegistry.ActivityResultListener() {
             @Override
             public boolean onActivityResult(int i, int i1, Intent intent) {
+
                 if (i == REQ_CAMERA && i1 == Activity.RESULT_OK) {
 
                     new Thread(new Runnable() {
@@ -80,15 +76,15 @@ public class CameraPlugin implements MethodCallHandler {
 
                                 byte[] bitmapBytes = baos.toByteArray();
                                 String base64Image = Base64.encodeToString(bitmapBytes, Base64.NO_WRAP);
-                                if (cameraResult != null) {
-                                    cameraResult.success(base64Image);
-                                    cameraResult = null;
-                                    /*
-                                    * 强制内存回收
-                                    * 防止OM
-                                    * */
-                                    System.gc();
-                                }
+
+                                cameraResult.success(base64Image);
+                                bitmap.recycle();
+                                bitmap = null;
+                                baos = null;
+                                bitmapBytes = null;
+                                base64Image = null;
+                                cameraResult = null;
+
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
                             }
@@ -98,6 +94,15 @@ public class CameraPlugin implements MethodCallHandler {
                 return false;
             }
         });
+    };
+
+    /**
+     * Plugin registration.
+     */
+    public static void registerWith(final Registrar registrar) {
+
+        final MethodChannel channel = new MethodChannel(registrar.messenger(), "camera");
+        channel.setMethodCallHandler(new CameraPlugin(registrar));
     }
 
     @Override
@@ -105,6 +110,7 @@ public class CameraPlugin implements MethodCallHandler {
 
         switch (call.method) {
             case "takePhoto":
+                System.gc();
                 takePhoto(result);
                 break;
             default:
@@ -120,7 +126,7 @@ public class CameraPlugin implements MethodCallHandler {
     private void takePhoto(Result result) {
         cameraResult = result;
         AndPermission
-                .with(CameraPlugin.registrar.activity())
+                .with(registrar.activity())
                 .requestCode(100)
                 .permission(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
                 .callback(new PermissionListener() {
@@ -155,39 +161,4 @@ public class CameraPlugin implements MethodCallHandler {
         return file;
     }
 
-    private static Bitmap ImageCompress(Bitmap bitmap) {
-        // 图片允许最大空间 单位：KB
-        double maxSize = 700.00;
-        // 将bitmap放至数组中，意在bitmap的大小（与实际读取的原文件要大）
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] b = baos.toByteArray();
-        // 将字节换成KB
-        double mid = b.length / 1024;
-        // 判断bitmap占用空间是否大于允许最大空间 如果大于则压缩 小于则不压缩
-        if (mid > maxSize) {
-            // 获取bitmap大小 是允许最大大小的多少倍
-            double i = mid / maxSize;
-            // 开始压缩 此处用到平方根 将宽带和高度压缩掉对应的平方根倍
-            bitmap = zoomImage(bitmap, bitmap.getWidth() / Math.sqrt(i),
-                    bitmap.getHeight() / Math.sqrt(i));
-        }
-        return bitmap;
-    }
-
-    private static Bitmap zoomImage(Bitmap image, double newWidth, double newHeight) {
-        // 获取这个图片的宽和高
-        float width = image.getWidth();
-        float height = image.getHeight();
-        // 创建操作图片用的matrix对象
-        Matrix matrix = new Matrix();
-        // 计算宽高缩放率
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
-        // 缩放图片动作
-        matrix.postScale(scaleWidth, scaleHeight);
-        Bitmap bitmap = Bitmap.createBitmap(image, 0, 0, (int) width,
-                (int) height, matrix, true);
-        return bitmap;
-    }
 }

@@ -22,18 +22,20 @@ import io.flutter.view.FlutterNativeView;
  */
 public class InspectionVoicePlugin implements MethodCallHandler {
 
-    private static Registrar registrar;
+    private Registrar registrar;
     private Speech speech;
     private Result result;
     private TTSUtil ttsUtil;
 
-    private InspectionVoicePlugin() {
+    private InspectionVoicePlugin(Registrar registrar) {
+
+        this.registrar = registrar;
         
-        speech = new Speech(InspectionVoicePlugin.registrar.activity());
+        speech = new Speech(registrar.activity());
         //ttsUtil = TTSUtil.getInstance(InspectionVoicePlugin.registrar.activity());
         EventBus.getDefault().register(InspectionVoicePlugin.this);
 
-        InspectionVoicePlugin.registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
+        registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
             @Override
             public boolean onViewDestroy(FlutterNativeView flutterNativeView) {
                 EventBus.getDefault().unregister(InspectionVoicePlugin.this);
@@ -46,9 +48,8 @@ public class InspectionVoicePlugin implements MethodCallHandler {
      * Plugin registration.
      */
     public static void registerWith(Registrar registrar) {
-        InspectionVoicePlugin.registrar = registrar;
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "inspection_voice");
-        channel.setMethodCallHandler(new InspectionVoicePlugin());
+        channel.setMethodCallHandler(new InspectionVoicePlugin(registrar));
     }
 
     @Override
@@ -74,7 +75,7 @@ public class InspectionVoicePlugin implements MethodCallHandler {
     * */
     private void speechSynthesis(MethodCall call) {
         if (ttsUtil == null) {
-            ttsUtil = TTSUtil.getInstance(InspectionVoicePlugin.registrar.activity());
+            ttsUtil = TTSUtil.getInstance(registrar.activity());
         }
         String content = (String) call.argument("words");
         if (content != null) {
@@ -93,7 +94,7 @@ public class InspectionVoicePlugin implements MethodCallHandler {
     * */
     private void startSpeechInput() {
         AndPermission
-                .with(InspectionVoicePlugin.registrar.activity())
+                .with(registrar.activity())
                 .requestCode(100)
                 .permission(Manifest.permission.RECORD_AUDIO)
                 .callback(new PermissionListener() {

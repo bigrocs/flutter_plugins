@@ -1,6 +1,7 @@
 package witparking.inspection.inspectionocr;
 
 import android.Manifest;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
@@ -35,20 +36,21 @@ import io.flutter.view.FlutterNativeView;
  */
 public class InspectionOcrPlugin implements MethodCallHandler {
 
-    private static Registrar registrar;
     private SpiteUtil spiteUtil;
     private Result recognitionResult;
+    private Registrar registrar;
 
-    private InspectionOcrPlugin() {
+    private InspectionOcrPlugin(Registrar registrar) {
+
+        this.registrar = registrar;
 
         EventBus.getDefault().register(InspectionOcrPlugin.this);
 
-        spiteUtil = new SpiteUtil(InspectionOcrPlugin.registrar.activity());
+        spiteUtil = new SpiteUtil(registrar.activity());
         spiteUtil.init();
+        
 
-        Log.e("初始化测试", "初始化");
-
-        InspectionOcrPlugin.registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
+        registrar.addViewDestroyListener(new PluginRegistry.ViewDestroyListener() {
             @Override
             public boolean onViewDestroy(FlutterNativeView flutterNativeView) {
                 EventBus.getDefault().unregister(InspectionOcrPlugin.this);
@@ -64,20 +66,19 @@ public class InspectionOcrPlugin implements MethodCallHandler {
      */
     public static void registerWith(Registrar registrar) {
 
-        InspectionOcrPlugin.registrar = registrar;
-
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "inspection_ocr");
-        channel.setMethodCallHandler(new InspectionOcrPlugin());
-
-        Log.e("初始化测试", "注册");
+        channel.setMethodCallHandler(new InspectionOcrPlugin(registrar));
     }
 
     @Override
     public void onMethodCall(MethodCall call, final Result result) {
         switch (call.method) {
             case "recognitionTheplate":
+
+                System.gc();
+
                 AndPermission
-                        .with(InspectionOcrPlugin.registrar.activity())
+                        .with(registrar.activity())
                         .requestCode(100)
                         .permission(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .callback(new PermissionListener() {
@@ -123,6 +124,9 @@ public class InspectionOcrPlugin implements MethodCallHandler {
 
                         byte[] bitmapBytes = baos.toByteArray();
                         base64Image = Base64.encodeToString(bitmapBytes, Base64.NO_WRAP);
+                        bitmap.recycle();
+                        bitmap = null;
+                        baos = null;
                     }
 
                     Map<String, String> map = new HashMap<String, String>();
@@ -130,11 +134,12 @@ public class InspectionOcrPlugin implements MethodCallHandler {
                     map.put("color", event.color);
                     map.put("path", event.path);
                     map.put("base64Image", base64Image);
+
                     recognitionResult.success(map);
-                    /*
-                        内存回收
-                    */
-                    System.gc();
+                    recognitionResult = null;
+                    base64Image = null;
+                    map = null;
+
                 } catch (Exception e) {
                     Log.e("OCR 异常", e.getMessage());
                 }
