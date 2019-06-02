@@ -66,7 +66,7 @@ public class CameraPlugin implements MethodCallHandler {
                                 Bitmap bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(photoUri));
 
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
                                 try {
                                     baos.flush();
                                     baos.close();
@@ -77,13 +77,14 @@ public class CameraPlugin implements MethodCallHandler {
                                 byte[] bitmapBytes = baos.toByteArray();
                                 String base64Image = Base64.encodeToString(bitmapBytes, Base64.NO_WRAP);
 
-                                cameraResult.success(base64Image);
-                                bitmap.recycle();
-                                bitmap = null;
-                                baos = null;
-                                bitmapBytes = null;
-                                base64Image = null;
-                                cameraResult = null;
+
+                                final String finalBase64Image = base64Image;
+                                registrar.activity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        cameraResult.success(finalBase64Image);
+                                    }
+                                });
 
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();

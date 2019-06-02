@@ -135,10 +135,13 @@ public class InspectionOcrPlugin implements MethodCallHandler {
                     map.put("path", event.path);
                     map.put("base64Image", base64Image);
 
-                    recognitionResult.success(map);
-                    recognitionResult = null;
-                    base64Image = null;
-                    map = null;
+                    final Map<String, String> finalMap = map;
+                    registrar.activity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            recognitionResult.success(finalMap);
+                        }
+                    });
 
                 } catch (Exception e) {
                     Log.e("OCR 异常", e.getMessage());
