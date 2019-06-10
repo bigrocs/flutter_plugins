@@ -276,7 +276,7 @@ public class MqttManager {
 
     public void onDestroy() {
         try {
-            scheduler.shutdown();
+            if (scheduler != null) scheduler.shutdown();
             client.disconnect();
         } catch (MqttException e) {
             e.printStackTrace();

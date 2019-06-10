@@ -61,6 +61,7 @@ public class InspectionQrcodePlugin implements MethodCallHandler {
     public void onMethodCall(MethodCall call, Result result) {
         switch (call.method) {
             case "startScan":
+                System.gc();
                 scanResult = result;
                 AndPermission
                         .with(registrar.activity())
