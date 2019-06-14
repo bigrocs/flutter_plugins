@@ -1,8 +1,7 @@
 package witparking.inspection.inspectionpay;
 
-import android.content.pm.ApplicationInfo;
-import android.util.Log;
-
+import android.content.Intent;
+import android.os.Bundle;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,20 +9,17 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
+import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 import com.ums.AppHelper;
-import com.ypy.eventbus.EventBus;
 
 /**
  * InspectionPayPlugin
  */
 public class InspectionPayPlugin implements MethodCallHandler {
 
-  private static final String SCANTOPAY = "pay_scan";
-  private static final String UNIONPAYSCAN = "pay_union_scan";
-
-  private static final String WUWEIUNIONAPPID = "e7e157a1475e453ea82d17b4f9184551";
+  private final String UNIONPAYSCAN = "pay_union_scan";
 
   private Registrar registrar;
 
@@ -31,7 +27,18 @@ public class InspectionPayPlugin implements MethodCallHandler {
 
   private InspectionPayPlugin(Registrar registrar) {
     this.registrar = registrar;
-    EventBus.getDefault().register(this);
+    registrar.addActivityResultListener(new PluginRegistry.ActivityResultListener() {
+      @Override
+      public boolean onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == 1000) {
+          Bundle bundle = intent.getExtras();
+          assert bundle != null;
+          String result = bundle.getString("result");
+          unionPayResult.success(result);
+        }
+        return false;
+      }
+    });
   };
 
   /**
@@ -47,9 +54,9 @@ public class InspectionPayPlugin implements MethodCallHandler {
 
     switch (call.method) {
       case UNIONPAYSCAN:
-        unionPay(0, call, result);
+        unionPay(call, result);
         break;
-      case SCANTOPAY:
+      case "":
         result.notImplemented();
         break;
       default:
@@ -58,38 +65,33 @@ public class InspectionPayPlugin implements MethodCallHandler {
     }
   }
 
-  private void unionPay(int type, MethodCall call, Result result) {
+  private void unionPay(MethodCall call, Result result) {
 
     unionPayResult = result;
-    int amt = call.argument("amt") == null ? 0 : (int) call.argument("amt");
 
     JSONObject transData = new JSONObject();
     try {
-      transData.put("appId", WUWEIUNIONAPPID);
-      transData.put("amt", amt);
+      transData.put("appId", call.argument("appId"));
+      transData.put("amt", call.argument("Amount"));
+      transData.put("isNeedPrintReceipt", true);
+
+      String transType = call.argument("TransType");
+
+      assert transType != null;
+      if(transType.equals("2")){
+        transData.put("extOrderNo", call.argument("outTradeNo"));
+        transData.put("extBillNo", call.argument("outTradeNo"));
+        AppHelper.callTrans(registrar.activity(), "银行卡收款", "消费", transData);
+      }else if(transType.equals("110")){
+        transData.put("extOrderNo", call.argument("outTradeNo"));
+        transData.put("extBillNo", call.argument("outTradeNo"));
+        AppHelper.callTrans(registrar.activity(), "POS 通", "扫一扫", transData);
+      }else{
+        AppHelper.callTrans(registrar.activity(), "公共资源", "签到",transData);
+      }
     } catch (JSONException e) {
       e.printStackTrace();
-      result.success("参数异常");
-      return;
-    }
-
-    try {
-      if (type == 0) {
-        AppHelper.callTrans(registrar.activity(), "POS 通", "扫一扫", transData);
-      }else
-      {
-        AppHelper.callTrans(registrar.activity(), "银行卡收款", "消费", transData);
-      }
-    } catch (Exception e) {
-      result.success("未安装银联客户端");
     }
   }
 
-  /*
-  * 处理银联支付结果
-  * event_bus通知
-  * */
-  public void onEventMainThread(UnionPayEvent event) {
-    unionPayResult.success(event.result);
-  }
 }
