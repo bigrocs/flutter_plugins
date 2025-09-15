@@ -1,14 +1,15 @@
 # inspection_printer
 
-巡检端打印机
+A new Flutter plugin project.
 
 ## Getting Started
 
 This project is a starting point for a Flutter
-[plug-in package](https://flutter.io/developing-packages/),
+[plug-in package](https://flutter.dev/to/develop-plugins),
 a specialized package that includes platform-specific implementation code for
 Android and/or iOS.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+

@@ -1,42 +1,68 @@
-group 'witparking.inspection.inspectionprinter'
-version '1.0-SNAPSHOT'
+group 'witparking.inspection.inspection_printer'
+version '1.0'
+
 buildscript {
+    ext.kotlin_version = '1.7.10'
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
-}
-rootProject.allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
-}
-apply plugin: 'com.android.library'
-android {
-    compileSdkVersion 27
 
-    defaultConfig {
-        minSdkVersion 16
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    lintOptions {
-        disable 'InvalidPackage'
-    }
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
+    allprojects {
+        repositories {
+            google()
+            mavenCentral()
+            maven { url = uri('https://maven.sunmi.com/repository/maven-public/') }
+            maven {
+                url = uri('http://maven.landicorp.com/repository/ept-and-sdk/')
+                allowInsecureProtocol = true
+            }
         }
     }
 }
 
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url = uri('http://maven.landicorp.com/repository/ept-and-sdk/')
+            allowInsecureProtocol = true
+        }
+    }
+}
+
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+
 dependencies {
-    implementation files('libs/platform_sdk_v2.3.706.jar')
-    compileOnly files('libs/core-3.3.0.jar')
-    implementation files('libs/eptapilibrary-1.2.27.jar')
-    implementation files('libs/btprintsdk_V1.7.8.25.jar')
+    implementation('com.sunmi:printerx:1.0.17') {
+        transitive = false
+        // exclude group: 'com.sunmi', module: 'trans' // Keep this commented out for now
+    }
+    implementation 'com.landicorp.eptapilibrary:ept-and-sdk:2.6.6'
+}
+
+android {
+    namespace 'witparking.inspection.inspection_printer'
+    compileSdkVersion 33
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 33
+    }
 }

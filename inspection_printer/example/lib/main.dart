@@ -4,15 +4,20 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:inspection_printer/inspection_printer.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+  final _inspectionPrinterPlugin = InspectionPrinter();
 
   @override
   void initState() {
@@ -24,8 +29,10 @@ class _MyAppState extends State<MyApp> {
   Future<void> initPlatformState() async {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
+    // We also handle the message potentially returning null.
     try {
-      platformVersion = await InspectionPrinter.platformVersion;
+      platformVersion =
+          await _inspectionPrinterPlugin.getPlatformVersion() ?? 'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
